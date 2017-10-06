@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
-import { Header } from '../../containers/Header'
-
+import { HeaderContainer } from '../../containers/Header'
+import {ItemCard} from '../common'
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
         <div className="appHeader">
-            <Header />
+            <HeaderContainer />
         </div>
         <div className="appContent">
             {children}
+            <div className="view"><ItemCard /></div>
         </div>
         {/* And a footer here, but not on the login route... */}
     </div>

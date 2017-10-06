@@ -5,7 +5,7 @@ class MyProfile extends Component {
   render() {
     return (
 
-      <RaisedButton> My Profile </RaisedButton>
+      <RaisedButton label='My Profile' primary />
 
     )
   }

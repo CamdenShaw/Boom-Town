@@ -5,7 +5,7 @@ class Logout extends Component {
 
   render() {
     return (
-      <RaisedButton> Logout </RaisedButton>
+      <RaisedButton label='Logout' labelColor='white' backgroundColor='#343434' />
     )
   }
 
