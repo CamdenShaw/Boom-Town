@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MyProfile, Logo, Logout, Search } from './common/'
+import { MyProfile, Logo, Logout, Search } from '../../components/common/'
 import AppBar from 'material-ui/AppBar'
 
 
@@ -7,7 +7,9 @@ import AppBar from 'material-ui/AppBar'
 class Header extends Component {
   render() {
     return (
-      <AppBar showMenuIconButton={false} titleStyle={{display: 'none'}} style={{backgroundColor: 'ivory', display: 'flex', width: '100vw', height: '64px', justifyContent: 'space-between'}}>
+      <AppBar showMenuIconButton={false}
+        titleStyle={{display: 'none'}}
+        style={{backgroundColor: 'ivory', display: 'flex', width: '100vw', height: '64px', justifyContent: 'space-between'}}>
         <div className='left-container' style={{display: 'flex'}}>
           <div className='logo-container'><Logo /></div>
           <div className='search-container'><Search /></div>

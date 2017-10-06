@@ -12,6 +12,7 @@ import Login from './containers/Login';
 const Boomtown = () => (
     <MuiThemeProvider muiTheme={muiTheme}>
         <Layout>
+            <Login />
         </Layout>
     </MuiThemeProvider>
 
