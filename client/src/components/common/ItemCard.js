@@ -1,36 +1,37 @@
-import React, {Component} from 'react'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui'
+import React, { Component } from 'react'
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui'
 import RaisedButton from 'material-ui/RaisedButton'
 import home from '../../images/home-tr.svg'
 import image from '../../images/item-placeholder.jpg'
+import CardFetch from './CardFetch'
 
-class ItemCard extends Component {
-  render() {
-    return (
-      <Card containerStyle={{width: 300, maxHeight: '100%', padding: 0, margin: 0}}>
-        <CardMedia
-          overlay={<CardTitle title="test Overlay title" subtitle="test Overlay subtitle" />}
-        >
-          <img src={image} alt="" />
-        </CardMedia>
-        <CardHeader
-          title="test Avatar"
-          subtitle="test Subtitle"
-          avatar={home}
-        />
-        <CardTitle title="test Card title" subtitle = "test Card subtitle" />
-        <CardText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+export const ItemCard = ({ fetchItem, users }) => {
+  const userName = users.map(user => (user.id === fetchItem.itemOwner && user.fullName))
+  const userBio = users.map(user => (user.id === fetchItem.itemOwner && user.bio ))
+  console.log(userName)
+  return (
+    <Card containerStyle={{ width: 300, maxHeight: '100%', padding: 0, margin: 0 }}>
+      <CardMedia
+        overlay={<CardTitle title={ fetchItem.available ? '' : fetchItem.title } subtitle={ fetchItem.available ? '' : "Item borrowed" } />}
+      >
+        <img src={ fetchItem.imageUrl ? fetchItem.imageUrl : '../../images/item-placeholder.jpg' } alt="" />
+      </CardMedia>
+      <CardHeader
+        title={ userName ? userName : "Default Avatar Name" }
+        subtitle={ userBio ? userBio : "Default Avatar Bio" }
+        avatar={ home }
+      />
+      <CardTitle title={fetchItem.title ? fetchItem.title :"test Card title" } subtitle={  fetchItem.subtitle ? fetchItem.subtitle : "test Card subtitle" } />
+      <CardText>
+        { fetchItem.description ? fetchItem.description :
+        `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
           Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`}
         </CardText>
-        <CardActions>
-          <RaisedButton label="Borrow" />
-        </CardActions>
-      </Card>
-    )
-  }
+      <CardActions>
+        <RaisedButton label="Borrow" labelColor='white' backgroundColor='#343434' />
+      </CardActions>
+    </Card>
+  )
 }
-
-export default ItemCard

@@ -15,9 +15,14 @@
 .view {
   margin: 64px 20px 20px;
   width: 100vw;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .view div {
-  background-color: rgba(0, 0, 0, 0) !important;
-  box-shadow: none !important;
+  width: 300px;
+  margin:0;
+}
+
+.view div div {
+  width: auto;
 }
