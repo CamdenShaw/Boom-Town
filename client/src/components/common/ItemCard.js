@@ -4,11 +4,13 @@ import RaisedButton from 'material-ui/RaisedButton'
 import home from '../../images/home-tr.svg'
 import image from '../../images/item-placeholder.jpg'
 import CardFetch from './CardFetch'
+import Gravatar from 'react-gravatar'
 
 export const ItemCard = ({ fetchItem, users }) => {
   const userName = users.map(user => (user.id === fetchItem.itemOwner && user.fullName))
   const userBio = users.map(user => (user.id === fetchItem.itemOwner && user.bio ))
-  console.log(userName)
+  const userEmail = users.map(user => (user.id === fetchItem.itemOwner && user.email))
+  console.log(userBio, userName, userEmail)
   return (
     <Card containerStyle={{ width: 320, maxHeight: '100%', padding: 0, margin: 0 }}>
       <CardMedia style={{margin: 0}}
@@ -19,7 +21,7 @@ export const ItemCard = ({ fetchItem, users }) => {
       <CardHeader
         title={ userName ? userName : "Default Avatar Name" }
         subtitle={ userBio ? userBio : "Default Avatar Bio" }
-        avatar={ home }
+        avatar={userEmail ? <Gravatar style={{borderRadius: '50%'}}email={`${userEmail}`} /> : home}
       />
       <CardTitle title={fetchItem.title ? fetchItem.title :"test Card title" } subtitle={  fetchItem.subtitle ? fetchItem.subtitle : "test Card subtitle" } />
       <CardText>
