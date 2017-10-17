@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ItemCard } from './ItemCard'
+import { Brick } from 'react'
 
 import { connect } from 'react-redux'
 import { getCardItems } from '../../actions'

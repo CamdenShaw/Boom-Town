@@ -10,9 +10,9 @@ export const ItemCard = ({ fetchItem, users }) => {
   const userBio = users.map(user => (user.id === fetchItem.itemOwner && user.bio ))
   console.log(userName)
   return (
-    <Card containerStyle={{ width: 300, maxHeight: '100%', padding: 0, margin: 0 }}>
-      <CardMedia
-        overlay={<CardTitle title={ fetchItem.available ? '' : fetchItem.title } subtitle={ fetchItem.available ? '' : "Item borrowed" } />}
+    <Card containerStyle={{ width: 320, maxHeight: '100%', padding: 0, margin: 0 }}>
+      <CardMedia style={{margin: 0}}
+        overlay={!fetchItem.available && <CardTitle style={{margin: 0}} title={ fetchItem.available ? '' : fetchItem.title } subtitle={ fetchItem.available ? '' : "Item borrowed" } />}
       >
         <img src={ fetchItem.imageUrl ? fetchItem.imageUrl : '../../images/item-placeholder.jpg' } alt="" />
       </CardMedia>
@@ -30,7 +30,7 @@ export const ItemCard = ({ fetchItem, users }) => {
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`}
         </CardText>
       <CardActions>
-        <RaisedButton label="Borrow" labelColor='white' backgroundColor='#343434' />
+      { fetchItem.available && <RaisedButton label="Borrow" labelColor='white' backgroundColor='#343434' /> }
       </CardActions>
     </Card>
   )
