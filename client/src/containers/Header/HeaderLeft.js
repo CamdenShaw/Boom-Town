@@ -7,7 +7,7 @@ class HeaderLeft extends Component {
   render() {
     return (
       <div className='left-container' style={{ height: 50, display: 'flex'}}>
-        <Logo />
+        <Logo style={{top: -24}} />
         <Search />
       </div>
     )
