@@ -48,7 +48,7 @@ class Search extends Component {
         multiple={true}
         floatingLabelText='Filtered by Tag'
         value={this.state.tags}
-        style={{top: -24}}
+        style={{top: -24, margin: '0px 20px'}}
       >
         {this.menuItems(tags)}
       </SelectField>

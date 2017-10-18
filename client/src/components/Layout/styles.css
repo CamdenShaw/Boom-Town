@@ -12,18 +12,8 @@
   flex:1;
 }
 
-.view {
-  margin: 64px 20px 20px;
-  width: 100%;
+.item-gallery {
+  margin: 0 20px 20px;
+  width: 1140px;
   background-color: rgba(0, 0, 0, 0);
-}
-
-.view div {
-  margin: 0 auto 30px auto;
-  width: 320px;
-}
-
-.view div div {
-  width: auto;
-  margin: 0;
 }

@@ -8,22 +8,30 @@ import Gravatar from 'react-gravatar'
 
 export const ItemCard = ({ fetchItem, users }) => {
   const userName = users.map(user => (user.id === fetchItem.itemOwner && user.fullName))
-  const userBio = users.map(user => (user.id === fetchItem.itemOwner && user.bio ))
   const userEmail = users.map(user => (user.id === fetchItem.itemOwner && user.email))
-  console.log(userBio, userName, userEmail)
+  console.log(userName, userEmail)
   return (
-    <Card containerStyle={{ width: 320, maxHeight: '100%', padding: 0, margin: 0 }}>
+    <Card containerStyle={{ maxHeight: '100%', padding: 0, margin: 0 }}>
       <CardMedia style={{margin: 0}}
-        overlay={!fetchItem.available && <CardTitle style={{margin: 0}} title={ fetchItem.available ? '' : fetchItem.title } subtitle={ fetchItem.available ? '' : "Item borrowed" } />}
+        overlay={!fetchItem.available && <CardTitle 
+                                            style={{ margin: 0 }}
+                                            subtitle={ fetchItem.available ? '' : "Unavailable" }
+                                         />}
       >
         <img src={ fetchItem.imageUrl ? fetchItem.imageUrl : '../../images/item-placeholder.jpg' } alt="" />
       </CardMedia>
       <CardHeader
         title={ userName ? userName : "Default Avatar Name" }
-        subtitle={ userBio ? userBio : "Default Avatar Bio" }
-        avatar={userEmail ? <Gravatar style={{borderRadius: '50%'}}email={`${userEmail}`} /> : home}
+        subtitle={ fetchItem.createdOn ? fetchItem.createdOn : "Default Avatar Bio" }
+        avatar={userEmail ? <Gravatar
+                              style={{borderRadius: '50%'}}
+                              email={`${userEmail}`}
+                            /> : home}
       />
-      <CardTitle title={fetchItem.title ? fetchItem.title :"test Card title" } subtitle={  fetchItem.subtitle ? fetchItem.subtitle : "test Card subtitle" } />
+      <CardTitle
+        title={fetchItem.title ? fetchItem.title :"test Card title" }
+        subtitle={  fetchItem.tags ? fetchItem.tags : "test Card subtitle" }
+      />
       <CardText>
         { fetchItem.description ? fetchItem.description :
         `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -31,9 +39,17 @@ export const ItemCard = ({ fetchItem, users }) => {
           Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`}
         </CardText>
-      <CardActions>
-      { fetchItem.available && <RaisedButton label="Borrow" labelColor='white' backgroundColor='#343434' /> }
-      </CardActions>
+      <CardActions> {
+                    fetchItem.available && <RaisedButton
+                                              secondary={true}
+                                              label="Borrow"
+                                              backgroundColor='#343434'
+                                              onClick={ (fetchItem) => {
+                                                console.log('click')
+                                                return fetchItem = {...fetchItem, "available": false}
+                                                }}
+                                            />
+      } </CardActions>
     </Card>
   )
 }

@@ -13,13 +13,11 @@ const Layout = ({ children }) => (
         </div>
         <div className="appContent">
             { children }
-            <div className="view" style={{display: 'flex', flexDirection: 'column', height: 4300, flexWrap: 'wrap'}}>
 
-                <CardFetch>
-                    <Masonry /> 
-                </CardFetch>
+            <CardFetch>
+                <Masonry /> 
+            </CardFetch>
                 
-            </div>
         </div>
         {/* And a footer here, but not on the login route... */}
     </div>

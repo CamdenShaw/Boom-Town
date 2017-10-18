@@ -4,7 +4,7 @@ import logo from '../../images/boomtown-logo.svg'
 class Logo extends Component {
   render() {
     return (
-      <img src={logo} style={{height: 50}} />
+      <img src={logo} style={{height: 50, margin: '0 5px', padding: 6}} />
     )
   }
 }

@@ -9,7 +9,9 @@ class HeaderRight extends Component {
       <div className='right-container' style={{
           display: 'flex', 
           width: '250px', 
-          justifyContent: 'space-around'}}
+          justifyContent: 'space-around',
+          marginRight: 12,
+          marginTop: 6}}
         >
         <div className='my-profile-container'><MyProfile /></div>
         <div className='logout-container'><Logout /> </div>

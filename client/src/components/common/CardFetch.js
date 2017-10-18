@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ItemCard } from './ItemCard'
-import { Brick } from 'react'
+import Masonry from 'react-masonry-component'
+
 
 import { connect } from 'react-redux'
 import { getCardItems } from '../../actions'
@@ -17,7 +18,14 @@ class CardFetch extends Component {
 
     console.log('CardFetch', this.props)
 
-    return ( this.props.allItems.map((item) => <ItemCard fetchItem={ item } users={ this.props.users } />))
+    return ( <Masonry className={'item-gallery'} elementType={'ul'} >
+    
+      {
+        this.props.allItems.map((item) =>
+          <li style={{padding: '1%', width: '33.333333333333%'}}><ItemCard fetchItem={ item } users={ this.props.users } /></li>
+        )
+      }
+    </Masonry> )
   }
 }
 

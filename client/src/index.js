@@ -16,18 +16,18 @@ const store = configStore();
 class Boomtown extends Component {
     render() {
         return (
-                <MuiThemeProvider muiTheme={muiTheme}>
-                    <Layout>
-                        {/* <Login /> */}
-                    </Layout>
-                </MuiThemeProvider>
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <Layout>
+                    {/* <Login /> */}
+                </Layout>
+            </MuiThemeProvider>
         )
     }
 };
 
 ReactDOM.render(
-<Provider store={store}>
-   <Boomtown />
-</Provider>,
+    <Provider store={store}>
+    <Boomtown />
+    </Provider>,
  document.getElementById('root'));
 registerServiceWorker();
