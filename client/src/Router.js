@@ -7,29 +7,30 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import logo from './logo.svg';
-import './App.css';
 import Login from './containers/Login'
+import Layout from './components/Layout';
+import CardFetch from './components/common/CardFetch'
 
-const Home = () => <div>Home</div>
+const Home = () => <CardFetch />
 const Profile = () => <div>Profile</div>
 const NotFound = () => <div>Error 404.  Sorry, no no such page exists</div>
-const Login = () => <Login />
+const LogiN = () => <Login />
 
-class Router extends Component {
+class Routers extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          {/*put NotFound / LandingPage route & component here when in dev mode for a live site -> 'site under construction'*/}
-          <Route exact path="/" component={Home} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/Login" component={Login} />
-          <Route component={NotFound} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/login" component={LogiN} />
+            <Route component={NotFound} />
+          </Switch>
+        </Layout>
       </Router>
     );
   }
 }
 
-export default Router;
+export default Routers;

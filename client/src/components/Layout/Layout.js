@@ -4,22 +4,15 @@ import Masonry from 'react';
 
 import './styles.css';
 import { HeaderContainer } from '../../containers/Header'
-import CardFetch from '../common/CardFetch'
+import Footer from '../../containers/Footer'
 
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        <div className="appHeader">
-            <HeaderContainer />
-        </div>
+        { window.location.href !== 'http://localhost:3000/login' && <HeaderContainer />}
         <div className="appContent">
             { children }
-
-            <CardFetch>
-                <Masonry /> 
-            </CardFetch>
-                
         </div>
-        {/* And a footer here, but not on the login route... */}
+        { window.location.href !== 'http://localhost:3000/login' && <Footer /> }
     </div>
 );
 

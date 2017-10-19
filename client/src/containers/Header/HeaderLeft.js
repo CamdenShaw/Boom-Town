@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Logo, Search } from '../../components/common'
 
-
-
 class HeaderLeft extends Component {
   render() {
     return (

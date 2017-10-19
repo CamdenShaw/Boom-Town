@@ -4,12 +4,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import configStore from './configStore';
 import { Provider } from 'react-redux';
+import Routers from './Router';
 
 import './index.css';
 import muiTheme from './config/theme';
-
-import Layout from './components/Layout';
-import Login from './containers/Login';
 
 const store = configStore();
 
@@ -17,9 +15,8 @@ class Boomtown extends Component {
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
-                <Layout>
-                    {/* <Login /> */}
-                </Layout>
+                <Routers>
+                </Routers>
             </MuiThemeProvider>
         )
     }
