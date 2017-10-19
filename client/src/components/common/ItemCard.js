@@ -7,8 +7,8 @@ import CardFetch from './CardFetch'
 import Gravatar from 'react-gravatar'
 
 export const ItemCard = ({ fetchItem, users }) => {
-  const userName = users.map(user => (user.id === fetchItem.itemOwner && user.fullName))
-  const userEmail = users.map(user => (user.id === fetchItem.itemOwner && user.email))
+  const userName = users.map(user => (user.id === fetchItem.itemowner && user.fullname))
+  const userEmail = users.map(user => (user.id === fetchItem.itemowner && user.email))
   console.log(userName, userEmail)
   return (
     <Card containerStyle={{ maxHeight: '100%', padding: 0, margin: 0 }}>
@@ -18,11 +18,11 @@ export const ItemCard = ({ fetchItem, users }) => {
                                             subtitle={ fetchItem.available ? '' : "Unavailable" }
                                          />}
       >
-        <img src={ fetchItem.imageUrl ? fetchItem.imageUrl : '../../images/item-placeholder.jpg' } alt="" />
+        <img src={ fetchItem.imageurl ? fetchItem.imageurl : '../../images/item-placeholder.jpg' } alt="" />
       </CardMedia>
       <CardHeader
         title={ userName ? userName : "Default Avatar Name" }
-        subtitle={ fetchItem.createdOn ? fetchItem.createdOn : "Default Avatar Bio" }
+        subtitle={ fetchItem.created ? fetchItem.created : "Default Avatar Bio" }
         avatar={userEmail ? <Gravatar
                               style={{borderRadius: '50%'}}
                               email={`${userEmail}`}
