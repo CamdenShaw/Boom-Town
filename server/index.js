@@ -1,12 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import cors from 'cors'
 
 import schema from './api/schema'
 
 const app = express();
 
 const GQL_PORT = 3010
+
+app.use('*', cors())
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
 
