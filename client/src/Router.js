@@ -9,10 +9,11 @@ import {
 
 import Login from './containers/Login'
 import Layout from './components/Layout';
-import CardFetch from './components/common/CardFetch'
+import CardFetchItems from './components/common/CardFetchItems'
+import CardFetchUsers from './components/common/ProfileFetch'
 
-const Home = () => <CardFetch />
-const Profile = () => <div>Profile</div>
+const Home = () => <CardFetchItems />
+const Profile = () => <CardFetchUsers />
 const NotFound = () => <div>Error 404.  Sorry, no no such page exists</div>
 const LogiN = () => <Login />
 

@@ -29,6 +29,15 @@ const typeDefs = `
     users: [User]
     user(id: ID!): User 
   }
+  type Mutation {
+    addItem (
+      title: String!
+      description: String
+      imageurl: String
+      tags: [String]
+      itemowner: ID!
+    ): Item
+  }
 `
 export default makeExecutableSchema({
   typeDefs,

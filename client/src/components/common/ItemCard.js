@@ -3,12 +3,12 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import RaisedButton from 'material-ui/RaisedButton'
 import home from '../../images/home-tr.svg'
 import image from '../../images/item-placeholder.jpg'
-import CardFetch from './CardFetch'
 import Gravatar from 'react-gravatar'
 
-export const ItemCard = ({ fetchItem, users }) => {
-  const userName = users.map(user => (user.id === fetchItem.itemowner && user.fullname))
-  const userEmail = users.map(user => (user.id === fetchItem.itemowner && user.email))
+export const ItemCard = ({ fetchItem }) => {
+  const userName = fetchItem.itemowner.fullname
+  const userEmail = fetchItem.itemowner.email
+  // const borrower = fetchItem.borrower.fullname
   console.log(userName, userEmail)
   return (
     <Card containerStyle={{ maxHeight: '100%', padding: 0, margin: 0 }}>
