@@ -1,4 +1,4 @@
-import { mainURL } from '../constants';
+import { mainURL } from '../../constants';
 
 const getUsersBegin = () => {
   return { type: 'GET_USERS_BEGIN' }

@@ -1,4 +1,4 @@
-import { mainURL } from '../constants';
+import { mainURL } from '../../constants';
 
 const getItemsBegin = () => {
   return { type: 'GET_ITEMS_BEGIN' }

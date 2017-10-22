@@ -1,4 +1,4 @@
-import { mainURL } from '../constants';
+import { mainURL } from '../../constants';
 import { getItemsUA } from './cardActionsUA'
 
 const getUsersBeginUA = () => {
