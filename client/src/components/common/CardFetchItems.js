@@ -55,11 +55,11 @@ const fetchItemData = gql`
     }
   }
 `
-const mapStateToProps = state => ({ filters: state.items.filters });
 
 
 export default graphql(fetchItemData)(CardFetchItems)
 
+// const mapStateToProps = state => ({ filters: state.items.filters });
 // WITH REDUX AND GRAPHQL
 // const itemsListWithData = graphql(FetchItemData)(ItemList);
 // export default connect(mapStateToProps)(itemsListWithData);

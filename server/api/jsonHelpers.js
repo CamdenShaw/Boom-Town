@@ -13,6 +13,12 @@ export const fetchStacked = (stuff, stack = '', uri = '') => {
   return fetch(`${jsonServer}/${stuff}/?${stack}=${uri}`)
 }
 
+export const fetchStackedLoader = (stuff, stack = '', uri = '') => {
+  return fetch(`${jsonServer}/${stuff}/?${stack}=${uri}`)
+              .then( response => response.json())
+              .catch( err => console.log(err))
+}
+
 export const createNewItem = ( title, imageurl, description, itemowner, tags ) => {
   const tzOffset = (new Date()).getTimezoneOffset() * 60000; // offset in milliseconds
   const localTime = `${(new Date(Date.now() - tzOffset)).toISOString().slice(0, -1).replace('T', ' ')}-07`;

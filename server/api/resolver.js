@@ -19,34 +19,32 @@ const resolversFunction = {
     }
   },
   Item: {
-    itemowner(item) {
-      return fetchFunction('users', item.itemowner)
+    async itemowner(item, arg, context) {
+      // return fetchFunction('users', item.itemowner)
+      return await context.loaders.ItemOwner.load(item.itemowner)
     },
     
-    borrower(item) {
-      if( !item.borrower ) return null
-      return fetchFunction('users', item.borrower)
+    async borrower(item, arg, context) {
+      // if( !item.borrower ) return null
+      // return fetchFunction('users', item.borrower)
+      return await context.loaders.ItemBorrower.load(item.borrower)
     }
   },
   User: {
     async itemsowned(user, arg, context) {
-      // const response = fetchStacked(url, 'items', 'itemowner', user.id)
+      // const response = await fetchStacked('items', 'itemowner', user.id)
       // await fetch(`${url}/items/?itemowner=${user.id}`)
       // const items = await response.json()
+      return await context.loaders.UserOwnedItems.load(user.id)
       // return items
-      if ( !user.id ) return null
-      try {
-      return context.loaders.UserOwnedItems.load(user.id)
-      } catch(e) {
-        console.log(e)
-      }
     },
     // created loaders for individual users, owned items and borrowed items, items and individual items
-    async itemsborrowed(user) {
-      const response = await fetchStacked('items', 'borrower', user.id)
-      //await fetch(`${url}/items/?borrower=${user.id}`)
-      const items = await response.json()
-      return items
+    async itemsborrowed(user, arg, context) {
+      // const response = await fetchStacked('items', 'borrower', user.id)
+      // //await fetch(`${url}/items/?borrower=${user.id}`)
+      // const items = await response.json()
+      // return items
+      return await context.loaders.UserBorrowedItems.load(user.id)
     }
   },
   Mutation: {
