@@ -5,6 +5,7 @@ firebase-admin.json
 
 # dependencies
 node_modules
+server/api/psql-server/psql
 
 # testing
 coverage
