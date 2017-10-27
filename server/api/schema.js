@@ -12,15 +12,18 @@ const typeDefs = `
     itemsborrowed: [Item]
   }
 
+  type Tag {
+    id: ID
+    title: String
+  }
+
   type Item {
     id: ID!
     title: String!
     description: String
     imageurl: String
-    tags: [String]
     itemowner: User!
     created: String
-    available: Boolean!
     borrower: User
   }
   type Query {
@@ -34,7 +37,6 @@ const typeDefs = `
       title: String!
       description: String
       imageurl: String
-      tags: [String]
       itemowner: ID!
     ): Item
   }

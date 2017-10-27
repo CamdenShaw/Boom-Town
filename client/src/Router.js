@@ -7,6 +7,7 @@ import {
   Redirect
 } from 'react-router-dom';
 
+import PrivateRouter from "./components/PrivateRouter/PrivateRouter"
 import Login from './containers/Login'
 import Layout from './components/Layout';
 import CardFetchItems from './components/common/CardFetchItems'

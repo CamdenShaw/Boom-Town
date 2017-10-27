@@ -1,35 +1,35 @@
-import React, { Component } from 'react'
-import { ItemCard } from './ItemCard'
+import React,  {Component }from 'react'
+import {ItemCard }from './ItemCard'
 import Masonry from 'react-masonry-component'
-import { graphql } from 'react-apollo'
+import {graphql }from 'react-apollo'
 import gql from 'graphql-tag'
 
 // import { connect } from 'react-redux'
-import { getCardItems } from '../../redux/modules'
+import {getCardItems }from '../../redux/modules'
 
 class CardFetchItems extends Component {
 
-  componentDidMount() {
+componentDidMount() {
 
-    // this.props.getCardItems()
-  }
+// this.props.getCardItems()
+}
 
   render() {
+    console.log(this.props)
+  const { data } = this.props
+  if (data.loading) return <p> loading </p>
 
-    const { data } = this.props
+  console.log('CardFetch', data)
 
-    console.log('CardFetch', data)
-
-    return ( <Masonry className={'item-gallery'} elementType={'ul'} >
-    
-      {
-        !data.loading ? 
-        data.items.map((item) =>
-          <li style={{padding: '1%', width: '33.333333333333%'}}><ItemCard fetchItem={ item } /></li>
-        )
-        : false
-      }
-    </Masonry> )
+  return (
+      <Masonry className =  {'item-gallery'}elementType =  {'ul'} >  { 
+        // !data.loading ?
+          data.items.map((item) => 
+            < li style =  { {padding:'1%', width:'33.333333333333%'}} >< ItemCard fetchItem =  { item }/></li > 
+          )
+        }
+      </Masonry >
+    )
   }
 }
 
@@ -40,7 +40,6 @@ const fetchItemData = gql`
       title
       description
       imageurl
-      tags
       itemowner {
         bio
         id
@@ -48,7 +47,6 @@ const fetchItemData = gql`
         fullname
       }
       created
-      available
       borrower {
         fullname
       }

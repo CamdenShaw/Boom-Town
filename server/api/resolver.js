@@ -1,12 +1,12 @@
 import fetch from 'node-fetch'
-import { fetchFunction, fetchStacked, createNewItem } from './jsonHelpers'
-
-const url = 'http://localhost:3001'
+import { fetchFunction, fetchStacked, createNewItem, getItems } from './jsonHelpers'
+import { database } from '../index'
 
 const resolversFunction = {
   Query: {
     items() {
-      return fetchFunction('items')
+      // return fetchFunction('items')
+      return database.getItems()
     },
     item(root, { id }) {
       return fetchFunction('items', id)
@@ -24,9 +24,14 @@ const resolversFunction = {
       return await context.loaders.ItemOwner.load(item.itemowner)
     },
     
+    // async tags(item, arg, context) {
+    //   return await cotext.loaders.Tags.load(item.tags)
+    // },
+    
     async borrower(item, arg, context) {
       // if( !item.borrower ) return null
       // return fetchFunction('users', item.borrower)
+      if(!item.borrower) return
       return await context.loaders.ItemBorrower.load(item.borrower)
     }
   },
@@ -44,12 +49,13 @@ const resolversFunction = {
       // //await fetch(`${url}/items/?borrower=${user.id}`)
       // const items = await response.json()
       // return items
+      if(!user.itemsborrowed) return ''
       return await context.loaders.UserBorrowedItems.load(user.id)
     }
   },
   Mutation: {
-    addItem(root, { title, imageurl, description, itemowner, tags }) { 
-      return createNewItem( title, imageurl, description, itemowner, tags )
+    addItem(root, { title, imageurl, description, itemowner }) { 
+      return createNewItem( title, imageurl, description, itemowner )
     }
   }
 }

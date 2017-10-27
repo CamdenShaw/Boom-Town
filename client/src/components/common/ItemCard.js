@@ -9,13 +9,13 @@ export const ItemCard = ({ fetchItem }) => {
   const userName = fetchItem.itemowner.fullname
   const userEmail = fetchItem.itemowner.email
   // const borrower = fetchItem.borrower.fullname
-  console.log(userName, userEmail)
+  // console.log(userName, userEmail)
   return (
     <Card containerStyle={{ maxHeight: '100%', padding: 0, margin: 0 }}>
       <CardMedia style={{margin: 0}}
-        overlay={!fetchItem.available && <CardTitle 
+        overlay={fetchItem.borrower && <CardTitle 
                                             style={{ margin: 0 }}
-                                            subtitle={ fetchItem.available ? '' : "Unavailable" }
+                                            subtitle={ fetchItem.borrower && "Unavailable" }
                                          />}
       >
         <img src={ fetchItem.imageurl ? fetchItem.imageurl : '../../images/item-placeholder.jpg' } alt="" />
@@ -30,7 +30,7 @@ export const ItemCard = ({ fetchItem }) => {
       />
       <CardTitle
         title={fetchItem.title ? fetchItem.title :"test Card title" }
-        subtitle={  fetchItem.tags ? fetchItem.tags : "test Card subtitle" }
+        subtitle={  fetchItem.tags ? fetchItem.tags : "No Tags" }
       />
       <CardText>
         { fetchItem.description ? fetchItem.description :
@@ -40,13 +40,13 @@ export const ItemCard = ({ fetchItem }) => {
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`}
         </CardText>
       <CardActions> {
-                    fetchItem.available && <RaisedButton
+                    !fetchItem.borrower && <RaisedButton
                                               secondary={true}
                                               label="Borrow"
                                               backgroundColor='#343434'
                                               onClick={ (fetchItem) => {
                                                 console.log('click')
-                                                return fetchItem = {...fetchItem, "available": false}
+                                                return fetchItem = {...fetchItem, "borrower": "this.user"}
                                                 }}
                                             />
       } </CardActions>

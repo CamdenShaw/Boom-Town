@@ -14,7 +14,10 @@ export default function() {
     )),
     ItemOwner: new DataLoader(ids => (
       Promise.all(ids.map(id => fetchFunction('users', id)))
-    ))
+    )),
+    // Tags: new DataLoader(ids => (
+    //   Promise.all(ids.map(id => fetchFunction('tags', id)))
+    // ))
     // other data loaders go here...
   }
 };
