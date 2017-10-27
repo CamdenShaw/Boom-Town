@@ -13,10 +13,12 @@ const initPostgres = (app) => {
   })
   console.log(pgClient)
 
-  return
-  getItems = () => {
-      return pgClient.query('SELECT * FROM items').then(res => res.rows)
+  return{
+    getItems(){
+        return pgClient.query('SELECT * FROM items').then(res => res.rows)
+    }
   }
+  
 }
 
 export default initPostgres

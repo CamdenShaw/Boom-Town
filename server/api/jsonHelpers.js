@@ -2,6 +2,7 @@ import fetch from 'node-fetch'
 import pool from './psql-server/pg-resource'
 
 const jsonServer = 'http://localhost:3001'
+const expressServer = 'http://localhost:3011'
 
 export const fetchFunction = (stuff, uri = '') => {
   return fetch(`${jsonServer}/${stuff}/${uri}/`)
