@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router, 
   Route,
   Switch,
-  Link,
   Redirect
 } from 'react-router-dom';
 
@@ -12,11 +11,13 @@ import Login from './containers/Login'
 import Layout from './components/Layout';
 import CardFetchItems from './components/common/CardFetchItems'
 import CardFetchUsers from './components/common/ProfileFetch'
+import SharePage from './containers/SharePage'
 
 const Home = () => <CardFetchItems />
 const Profile = () => <CardFetchUsers />
 const NotFound = () => <div>Error 404.  Sorry, no no such page exists</div>
 const LogiN = () => <Login />
+const Share = () => <SharePage />
 
 class Routers extends Component {
   render() {
@@ -27,6 +28,7 @@ class Routers extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
             <Route path="/login" component={LogiN} />
+            <Route path="/share" component={Share} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

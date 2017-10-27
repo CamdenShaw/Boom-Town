@@ -25,7 +25,7 @@ class Boomtown extends Component {
 
 ReactDOM.render(
     <ApolloProvider client={client} store={store}>
-    <Boomtown />
+        <Boomtown />
     </ApolloProvider>,
- document.getElementById('root'));
+document.getElementById('root'));
 registerServiceWorker();

@@ -5,14 +5,19 @@ import Masonry from 'react';
 import './styles.css';
 import { HeaderContainer } from '../../containers/Header'
 import Footer from '../../containers/Footer'
+import ShareButton from '../common/ShareButton'
+
+const loginUrl = 'http://localhost:3000/login'
+const thisUrl = window.location.href
 
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        { window.location.href !== 'http://localhost:3000/login' && <HeaderContainer />}
+        { thisUrl !== loginUrl && thisUrl !== `${loginUrl}?` && <HeaderContainer />}
         <div className="appContent">
             { children }
         </div>
-        { window.location.href !== 'http://localhost:3000/login' && <Footer /> }
+        { thisUrl !== loginUrl  && thisUrl !== `${loginUrl}?` && thisUrl !== 'http://localhost:3000/share' && <ShareButton />}
+        { thisUrl !== loginUrl  && thisUrl !== `${loginUrl}?` && <Footer /> }
     </div>
 );
 

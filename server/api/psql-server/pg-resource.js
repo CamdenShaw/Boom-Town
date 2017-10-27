@@ -11,10 +11,9 @@ const initPostgres = (app) => {
     idleTimeoutMillis: 3000,
     connectionTimeoutMillis: 2000,
   })
-  console.log(pgClient)
 
-  return{
-    getItems(){
+  return {
+    getItems() {
         return pgClient.query('SELECT * FROM items').then(res => res.rows)
     }
   }
