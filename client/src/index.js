@@ -6,10 +6,23 @@ import configStore from './redux/configStore';
 import { ApolloProvider } from 'react-apollo'
 import Routers from './Router';
 
+
 import './index.css';
 import muiTheme from './config/theme';
 
 import client from './config/apolloClient'
+import * as firebase from 'firebase'
+
+const config = {
+    apiKey: "AIzaSyCacootitVuGBMMLraKExCak9LGqgdb-LE",
+    authDomain: "boomtown-52ff4.firebaseapp.com",
+    databaseURL: "https://boomtown-52ff4.firebaseio.com",
+    projectId: "boomtown-52ff4",
+    storageBucket: "boomtown-52ff4.appspot.com",
+    messagingSenderId: "24265605984"
+  };
+  
+  firebase.initializeApp(config);
 
 const store = configStore();
 

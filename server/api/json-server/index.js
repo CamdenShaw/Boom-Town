@@ -1,11 +1,7 @@
-import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import cors from 'cors'
-import jsonLoaders from '../json-server/jsonLoaders'
-import pgLoaders from './pgLoaders'
-import initPostgres from './pg-resource'
-import initConfigs from './config'
+import jsonLoaders from './api/json-server/jsonLoaders'
 
 import schema from '../schema'
 
@@ -23,7 +19,7 @@ app.use(express.static(__dirname));
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
   schema,
-  context: { loaders: pgLoaders(), jsonLoaders() }
+  context: { loaders: jsonLoaders() }
   }))
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))

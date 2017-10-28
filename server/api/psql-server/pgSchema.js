@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from 'graphql-tools'
 
-import pgResolvers from './psql-server/pgResolvers'
-import fbResolvers from './firebase/firebaseResolvers'
+import jsonResolvers from '../json-server/jsonResolvers'
+import pgResolvers from './pgResolvers'
 
 const typeDefs = `
   type User {
@@ -44,6 +44,6 @@ const typeDefs = `
 `
 export default makeExecutableSchema({
   typeDefs,
-  pgResolvers,
-  fbResolvers
+  jsonResolvers,
+  pgResolvers
 })

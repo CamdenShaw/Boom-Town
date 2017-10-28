@@ -1,10 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { firebaseInit } from './api/firebase/firebaseInit'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import cors from 'cors'
-import createLoaders from './api/loaders';
-import initPostgres from './api/psql-server/pg-resource'
-import initConfigs from './api/psql-server/config'
+import pgLoaders from './api/psql-server/pgLoaders'
+import initPostgres from './api/psql-server/pgResource'
+import initConfigs from './api/psql-server/pgConfig'
 
 import schema from './api/schema'
 
@@ -22,7 +23,7 @@ app.use(express.static(__dirname));
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
   schema,
-  context: { loaders: createLoaders() }
+  context: { loaders: pgLoaders() }
   }))
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))

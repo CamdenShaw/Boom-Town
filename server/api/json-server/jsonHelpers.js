@@ -1,8 +1,6 @@
 import fetch from 'node-fetch'
-import pool from './psql-server/pg-resource'
 
 const jsonServer = 'http://localhost:3001'
-const expressServer = 'http://localhost:3011'
 
 export const fetchFunction = (stuff, uri = '') => {
   return fetch(`${jsonServer}/${stuff}/${uri}/`)
@@ -18,12 +16,6 @@ export const fetchStackedLoader = (stuff, stack = '', uri = '') => {
   return fetch(`${jsonServer}/${stuff}/?${stack}=${uri}`)
               .then( response => response.json())
               .catch( err => console.log(err))
-}
-
-export const getItems = async () => {
-  const response = await pool.query(`SELECT * FROM items`)
-  const items = await response.json();
-  return items
 }
 
 export const createNewItem = ( title, imageurl, description, itemowner, tags ) => {

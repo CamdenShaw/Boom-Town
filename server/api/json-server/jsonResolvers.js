@@ -1,12 +1,10 @@
 import fetch from 'node-fetch'
 import { fetchFunction, fetchStacked, createNewItem, getItems } from './jsonHelpers'
-import { database } from '../index'
 
 const resolversFunction = {
   Query: {
     items() {
-      // return fetchFunction('items')
-      return database.getItems()
+      return fetchFunction('items')
     },
     item(root, { id }) {
       return fetchFunction('items', id)
