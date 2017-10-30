@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Masonry from 'react';
+import { store } from '../../index'
 
 import './styles.css';
 import { HeaderContainer } from '../../containers/Header'
@@ -12,12 +13,12 @@ const thisUrl = window.location.href
 
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        { thisUrl !== loginUrl && thisUrl !== `${loginUrl}?` && <HeaderContainer />}
+        { store.users && thisUrl !== `${loginUrl}?` && <HeaderContainer />}
         <div className="appContent">
             { children }
         </div>
-        { thisUrl !== loginUrl  && thisUrl !== `${loginUrl}?` && thisUrl !== 'http://localhost:3000/share' && <ShareButton />}
-        { thisUrl !== loginUrl  && thisUrl !== `${loginUrl}?` && <Footer /> }
+        { store.users  && thisUrl !== `${loginUrl}?` && thisUrl !== 'http://localhost:3000/share' && <ShareButton />}
+        { store.users && thisUrl !== `${loginUrl}?` && <Footer /> }
     </div>
 );
 

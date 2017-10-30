@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { firebaseInit } from './api/firebase/firebaseInit'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import cors from 'cors'
 import pgLoaders from './api/psql-server/pgLoaders'

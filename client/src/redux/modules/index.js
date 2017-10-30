@@ -1,2 +1,10 @@
-export { getCardItems } from './cardActions';
-export { getUsersUA } from './userActionsUA'
+import getCardItems from './cardActions'
+import cardReducer from './cardReducers'
+import userReducer from './userReducer'
+import getUsersUA from './userActionsUA'
+import authReducer from './authReducer'
+export { getCardItems }
+export { cardReducer }
+export { userReducer }
+export { getUsersUA }
+export { authReducer }

@@ -45,5 +45,5 @@ const typeDefs = `
 export default makeExecutableSchema({
   typeDefs,
   pgResolvers,
-  fbResolvers
+  // fbResolvers
 })

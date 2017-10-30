@@ -5,6 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import configStore from './redux/configStore';
 import { ApolloProvider } from 'react-apollo'
 import Routers from './Router';
+import { notAuthorized, userAuthorized } from './redux//modules/authReducer'
 
 
 import './index.css';
@@ -22,9 +23,13 @@ const config = {
     messagingSenderId: "24265605984"
   };
   
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-const store = configStore();
+firebase.auth().onAuthStateChanged(function(user) {
+    user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
+})
+
+export const store = configStore();
 
 class Boomtown extends Component {
     render() {
@@ -37,7 +42,7 @@ class Boomtown extends Component {
 };
 
 ReactDOM.render(
-    <ApolloProvider client={client} store={store}>
+    <ApolloProvider client={client} store={configStore}>
         <Boomtown />
     </ApolloProvider>,
 document.getElementById('root'));
