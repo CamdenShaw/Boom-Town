@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { reduxForm, formValueSelector, Field } from "redux-form"
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 
 import ValidatedTextField from '../../components/ValidatedTextField';
+import Validator from '../../components/ValidatedTextField/Validator'
 
 import './styles.css';
 import logo from '../../images/boomtown-logo.svg';
@@ -25,21 +27,19 @@ const Login = ({login}) => (
         <div className="cardContainer">
             <Paper zDepth={5}>
                 <div className="formContainer">
-                    <form onSubmit={login} autoComplete="off">
+                    <form onSubmit={this.props.handleSubmit(login)} autoComplete="off">
                         <div>
-                            <ValidatedTextField
+                            <Field
                                 type="text"
                                 name="email"
-                                label="Email"
-                                component={email}
+                                component={ValidatedTextField}
                             />
                         </div>
                         <div>
-                            <ValidatedTextField
+                            <Field
                                 type="password"
                                 name="password"
-                                label="Password"
-                                component={password}
+                                component={ValidatedTextField}
                             />
                         </div>
                         <RaisedButton className="enterButton" primary fullWidth type="submit">

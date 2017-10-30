@@ -2,12 +2,12 @@ const AUTHORIZED = "AUTHORIZED"
 const NO_AUTH = "NO_AUTH"
 
 export const userAuthorized = (user) => ({
-  type: "AUTHORIZED",
+  type: AUTHORIZED,
   user
 })
 
 export const notAuthorized = () => ({
-  type: "NO_AUTH"
+  type: NO_AUTH
 })
 
 export default function(state = { user: null }, action) {

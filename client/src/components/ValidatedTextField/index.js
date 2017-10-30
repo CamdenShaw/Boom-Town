@@ -1,5 +1,5 @@
 import ValidatedTextField from './ValidatedTextField';
 import Validator from './Validator'
 
-export { ValidatedTextField };
+export default ValidatedTextField;
 export { Validator }
