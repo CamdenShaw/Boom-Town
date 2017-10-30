@@ -16,4 +16,4 @@ class NewUserForm extends Component {
   }
 }
 
-export default NewUserForm;
+export {NewUserForm};

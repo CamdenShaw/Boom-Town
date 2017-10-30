@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
@@ -28,16 +27,24 @@ const Login = ({login}) => (
                 <div className="formContainer">
                     <form onSubmit={login} autoComplete="off">
                         <div>
-                            <ValidatedTextField label="Email" />
+                            <ValidatedTextField
+                                type="text"
+                                name="email"
+                                label="Email"
+                                component={email}
+                            />
                         </div>
                         <div>
-                            <ValidatedTextField label="Password" />
+                            <ValidatedTextField
+                                type="password"
+                                name="password"
+                                label="Password"
+                                component={password}
+                            />
                         </div>
-                        <Link to='/'>
                         <RaisedButton className="enterButton" primary fullWidth type="submit">
                             Enter
                         </RaisedButton>
-                        </Link>
                     </form>
                 </div>
             </Paper>
