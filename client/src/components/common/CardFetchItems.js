@@ -15,13 +15,13 @@ componentDidMount() {
 }
 
   render() {
-    console.log(this.props)
-  const { data } = this.props
-  if (data.loading) return <p> loading </p>
+    console.log('props',this.props)
+    const { data } = this.props
+    if (data.loading) return <p> loading </p>
 
-  console.log('CardFetch', data)
+    console.log('CardFetch', data)
 
-  return (
+    return (
       <Masonry className =  {'item-gallery'}elementType =  {'ul'} >  { 
         // !data.loading ?
           data.items.map((item) => 
@@ -53,7 +53,6 @@ const fetchItemData = gql`
     }
   }
 `
-
 
 export default graphql(fetchItemData)(CardFetchItems)
 

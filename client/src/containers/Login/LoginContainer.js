@@ -4,58 +4,69 @@ import { NewUserForm } from '../NewUserForm/NewUserForm'
 import * as firebase from 'firebase'
 import { connect } from 'react-redux'
 import { reduxForm, formValueSelector, Field } from 'redux-form'
-import { Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { store } from '../../index'
 import { userAuthorized, notAuthorized } from '../../redux/modules/authReducer'
 
 import Login from './Login';
-import validator from '../../components/ValidatedTextField/Validator'
 
 class LoginContainer extends Component {
 
-    static propTypes = {
-    };
+  static propTypes = {
+  };
 
-    login = async (e) => {
-        e.preventDefault();
-        console.log('You clicked the login button.', e);
-      try {
-        await firebase.auth().createUserWithEmailAndPassword()
-        .then((user) => firebase.database().ref(`users/${user.uid}`)
-          .set({
-            // email,
-            // fullname,
-            // userBio
-          }).then(() => (
-              <Redirect to="/" />
-          )) 
-        ).catch((e) => {
-          let errorCode = e.code;
-          let errorMessage = e.message;
-          alert("no user exists", <NewUserForm />);
-        });
-      } catch(e) {
-        console.log(e)
-      }
-      //   firebase.auth().onAuthStateChanged(function(user) { 
-      //     user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
-      //   }).then( <Redirect to='/' />)
-
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('You clicked the login button.', e);
+    const {email, password} =  this.props.newUser;
+    console.log(email, password, this.props.newUser)
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch((err) => {
+          let errorCode = err.code
+          let errorMessage = err.message
+        }
+      )
+    } catch(e) {
+      console.log(e)
     }
+    firebase.auth().onAuthStateChanged(function(user) { 
+      user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
+      user && <Redirect to='/' />
+    })
+      
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user) => firebase.database().ref(`users/${user.uid}`)
+        .set({
+          email: 'email@email.email',
+          fullname: 'Email McGigger',
+          userBio: 'I like emailing',
+          id: `${user.uid}`
+        })
+      ).catch((e) => {
+        let errorCode = e.code;
+        let errorMessage = e.message;
+        alert("no user exists", <NewUserForm />);
+      });
+    } catch(e) {
+      console.log(e)
+    }
+    firebase.auth().onAuthStateChanged(function(user) { 
+      user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
+      user && <Redirect to='/' /> 
+    })
+  }
 
     state = {}
 
     render() {
+      console.log(this.props.newUser);
         return (
-            <Login login={this.login} />
+            <Login login={this.handleSubmit} />
         );
     }
 }
-
-const loginForm = reduxForm({
-  form: "loginForm",
-  validator
-})
 
 function mapStateToProps(state) {
   const values = formValueSelector("loginForm")
@@ -64,4 +75,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(loginForm);
+export default connect(mapStateToProps)(LoginContainer);

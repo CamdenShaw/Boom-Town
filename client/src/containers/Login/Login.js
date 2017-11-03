@@ -12,6 +12,7 @@ import './styles.css';
 import logo from '../../images/boomtown-logo.svg';
 import bottomLeft from '../../images/home-bl.svg';
 import topRight from '../../images/home-tr.svg';
+import validator from '../../components/ValidatedTextField/Validator'
 
 const Login = ({login}) => (
     <div className="page login">
@@ -27,10 +28,10 @@ const Login = ({login}) => (
         <div className="cardContainer">
             <Paper zDepth={5}>
                 <div className="formContainer">
-                    <form onSubmit={this.props.handleSubmit(login)} autoComplete="off">
+                    <form onSubmit={login} autoComplete="off">
                         <div>
                             <Field
-                                type="text"
+                                type="email"
                                 name="email"
                                 component={ValidatedTextField}
                             />
@@ -52,8 +53,12 @@ const Login = ({login}) => (
     </div>
 );
 
+const loginForm = reduxForm({
+    form: "loginForm"
+  })(Login)
+
 Login.propTypes = {
     login: PropTypes.func.isRequired
 };
 
-export default Login;
+export default loginForm

@@ -7,19 +7,20 @@ import {
 } from 'react-router-dom'
 
 import PrivateRouter from "./components/PrivateRouter/PrivateRouter"
-import Login from './containers/Login'
+import LoginContainer from './containers/Login/LoginContainer'
 import Layout from './components/Layout';
 import CardFetchItems from './components/common/CardFetchItems'
 import CardFetchUsers from './components/common/ProfileFetch'
 import SharePage from './containers/SharePage'
 
-const authenticated = false;
-const Home = () => authenticated ? <CardFetchItems /> : <Redirect to="/login" />
-const Profile = () => authenticated ? <CardFetchUsers /> : <Redirect to="/login" />
+let authenticated = false
+
+const Home = () => <CardFetchItems />
+const Profile = () => <CardFetchUsers />
 const NotFound = () => <Redirect to="/404" />
-const LogiN = () => authenticated ? <Redirect to="/" /> : <Login />
-const Share = () => authenticated ? <SharePage /> : <Redirect to="/login" />
-const p404 = () => authenticated ? <div>Error 404.  Sorry, no no such page exists</div> : <Redirect to="/login" />
+const LogiN = () => <LoginContainer />
+const Share = () => <SharePage />
+const p404 = () => <div>Error 404.  Sorry, no no such page exists</div>
 
 class Routers extends Component {
 
