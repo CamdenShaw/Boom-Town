@@ -15,18 +15,18 @@ componentDidMount() {
 }
 
   render() {
-    console.log('props',this.props)
+
     const { data } = this.props
     if (data.loading) return <p> loading </p>
 
-    console.log('CardFetch', data)
+    console.log('CardFetch', data, 'props', this.props)
 
     return (
       <Masonry className =  {'item-gallery'}elementType =  {'ul'} >  { 
-        // !data.loading ?
+        !data.loading ?
           data.items.map((item) => 
             < li style =  { {padding:'1%', width:'33.333333333333%'}} >< ItemCard fetchItem =  { item }/></li > 
-          )
+          ) : null
         }
       </Masonry >
     )

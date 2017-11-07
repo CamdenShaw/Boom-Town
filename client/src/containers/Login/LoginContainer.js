@@ -10,6 +10,34 @@ import { userAuthorized, notAuthorized } from '../../redux/modules/authReducer'
 
 import Login from './Login';
 
+
+function authStateChanged() {
+  firebase.auth().onAuthStateChanged(function(user) { 
+    user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
+    user && <Redirect to='/' />
+  })
+}
+
+function newUser(email, password) {
+  try {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((user) => firebase.database().ref(`users/${user.uid}`)
+      .set({
+        email: 'email@email.email',
+        fullname: 'Email McGigger',
+        userBio: 'I like emailing',
+        id: `${user.uid}`
+      })
+    ).catch((e) => {
+      let errorCode = e.code;
+      let errorMessage = e.message;
+      alert("no user exists", <NewUserForm />);
+    });
+  } catch(e) {
+    console.log(e)
+  }
+}
+
 class LoginContainer extends Component {
 
   static propTypes = {
@@ -19,7 +47,7 @@ class LoginContainer extends Component {
     e.preventDefault();
     console.log('You clicked the login button.', e);
     const {email, password} =  this.props.newUser;
-    console.log(email, password, this.props.newUser)
+    console.log(email, password, this.props.newUser, firebase)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
         .catch((err) => {
@@ -30,32 +58,9 @@ class LoginContainer extends Component {
     } catch(e) {
       console.log(e)
     }
-    firebase.auth().onAuthStateChanged(function(user) { 
-      user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
-      user && <Redirect to='/' />
-    })
-      
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((user) => firebase.database().ref(`users/${user.uid}`)
-        .set({
-          email: 'email@email.email',
-          fullname: 'Email McGigger',
-          userBio: 'I like emailing',
-          id: `${user.uid}`
-        })
-      ).catch((e) => {
-        let errorCode = e.code;
-        let errorMessage = e.message;
-        alert("no user exists", <NewUserForm />);
-      });
-    } catch(e) {
-      console.log(e)
-    }
-    firebase.auth().onAuthStateChanged(function(user) { 
-      user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
-      user && <Redirect to='/' /> 
-    })
+    authStateChanged();
+    newUser(email, password);
+    authStateChanged();
   }
 
     state = {}

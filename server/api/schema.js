@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from 'graphql-tools'
 
-import pgResolvers from './psql-server/pgResolvers'
 import fbResolvers from './firebase/firebaseResolvers'
+// import ResolverFunctions from "./psql-server/pgResolvers"
 
 const typeDefs = `
   type User {
@@ -26,6 +26,7 @@ const typeDefs = `
     itemowner: User!
     created: String
     borrower: User
+    tags: [Tag]
   }
   type Query {
     items: [Item]
@@ -42,8 +43,11 @@ const typeDefs = `
     ): Item
   }
 `
+// export default makeExecutableSchema({
+//   typeDefs,
+//   ResolverFunctions
+// })
 export default makeExecutableSchema({
   typeDefs,
-  pgResolvers,
-  // fbResolvers
+  fbResolvers
 })

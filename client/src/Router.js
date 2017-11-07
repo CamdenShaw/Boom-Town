@@ -18,7 +18,7 @@ let authenticated = false
 const Home = () => <CardFetchItems />
 const Profile = () => <CardFetchUsers />
 const NotFound = () => <Redirect to="/404" />
-const LogiN = () => <LoginContainer />
+const Login = () => <LoginContainer />
 const Share = () => <SharePage />
 const p404 = () => <div>Error 404.  Sorry, no no such page exists</div>
 
@@ -31,7 +31,7 @@ class Routers extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/profile" component={Profile} />
-            <Route path="/login" component={LogiN} />
+            <Route path="/login" component={Login} />
             <Route path="/share" component={Share} />
             <Route path="/404" component={p404} />
             <Route component={NotFound} />

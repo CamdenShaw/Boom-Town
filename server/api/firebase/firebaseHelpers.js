@@ -16,13 +16,14 @@ firebase.initializeApp(config);
 
 const firebaseDB = firebase.database();
 
-export const getUser = () => {
+export const getUser = (id) => {
   return new Promise((resolve, reject) => {
-    firebaseDB.refs('/users/${id}')
-            .once('values')
+    firebaseDB.ref('/users/${id}')
+            .once('value')
             .then((snapshot) => {
               resolve({
-              ...snapshot.val()
+              ...snapshot.val(),
+              id:id
               })
             }).catch(e => console.log(e))
   })
@@ -30,12 +31,57 @@ export const getUser = () => {
 
 export const getUsers = () => {
   return new Promise((resolve, reject) => {
-    firebaseDB.refs('/users')
-            .once('values')
+    firebaseDB.ref('/users')
+            .once('value')
             .then((snapshot) => {
-              resolve({
-                ...snapshot.val()
-              })
+              const userList = [];
+              const users = snapshot.val();
+
+              Object.keys(users).forEach(id => userList.push({
+                 ...user[id], id
+              }))
+              resolve(userList)
             }).catch(e => console.log(e))
   })
+}
+
+export const getItems = async () => {
+  const response = await pool.query(`SELECT * FROM items`)
+  const items = await response.json();
+  return items
+}
+
+export const getItem = async (id) => {
+  const response = await pool.query(`SELECT ${id} FROM items`)
+  const items = await response.json();
+  return items
+}
+
+export const getTags = async (id) => {
+  const response = await pool.query(`SELECT * FROM tags`)
+  const tags = await response.json();
+  return tags
+}
+
+export const createNewItem = ( title, imageurl, description, itemowner, tags ) => {
+  const tzOffset = (new Date()).getTimezoneOffset() * 60000; // offset in milliseconds
+  const localTime = `${(new Date(Date.now() - tzOffset)).toISOString().slice(0, -1).replace('T', ' ')}-07`;
+
+  const newItem = {
+    title,
+    description,
+    imageurl,
+    itemowner,
+    created: localTime,
+    borrower: null
+  }
+  return fetch(`${jsonServer}/items`, {
+            method: "POST",
+            headers: {
+              "accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newItem)
+          }).then( response => response.json())
+            .catch( err => console.log(err))
 }

@@ -1,6 +1,5 @@
 import DataLoader from 'dataloader';
-import { getItems } from '../psql-server/pgHelpers';
-import { getUsers } from './firebaseHelpers'
+import { getUsers, getItems, getUser, getItem, getTag } from './firebaseHelpers'
 
 export default function() {
   return {
@@ -10,11 +9,20 @@ export default function() {
     UserBorrowedItems: new DataLoader(ids => (
       Promise.all(ids.map(id => getItems(id)))
     )),
-    ItemBorrower: new DataLoader(ids => (
-      Promise.all(ids.map(id => getUsers(id)))
+    User: new DataLoader(ids => (
+      Promise.all(user.map((id) => getUser(id)))
     )),
-    ItemOwner: new DataLoader(ids => (
-      Promise.all(ids.map(id => getUsers(id)))
+    Item: new DataLoader(ids => (
+      Promise.all(item.map((id) => getItem(id)))
     )),
+    TaggedItems: new DataLoader(ids => (
+      Promise.all(tag.map((id) => getTag(id)))
+    ))
+    // ItemBorrower: new DataLoader(ids => (
+    //   Promise.all(ids.map(id => getUsers(id)))
+    // )),
+    // ItemOwner: new DataLoader(ids => (
+    //   Promise.all(ids.map(id => getUsers(id)))
+    // )),
   }
 };

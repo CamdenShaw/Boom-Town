@@ -8,8 +8,8 @@ const initPostgres = (app) => {
     password: app.get('PG_PASSWORD'),
     database: app.get('PG_DATABASE'),
     max: 20,
-    idleTimeoutMillis: 3000,
-    connectionTimeoutMillis: 2000,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 20000,
   })
 
   return {

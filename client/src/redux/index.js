@@ -11,5 +11,6 @@ export default combineReducers({
   users: cardReducer,
   items: userReducer,
   form: formReducer,
-  auth: authReducer
+  auth: authReducer,
+  tags: tagData
 })

@@ -2,10 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import cors from 'cors'
-import pgLoaders from './api/psql-server/pgLoaders'
+import fbLoaders from './api/firebase/firebaseLoaders'
 import initPostgres from './api/psql-server/pgResource'
 import initConfigs from './api/psql-server/pgConfig'
-
 import schema from './api/schema'
 
 const app = express();
@@ -22,7 +21,7 @@ app.use(express.static(__dirname));
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
   schema,
-  context: { loaders: pgLoaders() }
+  context: { loaders: fbLoaders() }
   }))
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
