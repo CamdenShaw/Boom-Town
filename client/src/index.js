@@ -29,7 +29,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
 })
 
-export const store = configStore();
+export const store = configStore;
 
 class Boomtown extends Component {
     render() {
