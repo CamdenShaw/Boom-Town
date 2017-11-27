@@ -50,17 +50,22 @@ class LoginContainer extends Component {
     console.log(email, password, this.props.newUser, firebase)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(console.log('success'))
         .catch((err) => {
+          console.log('err1', err)
+          newUser(email, password);
+          authStateChanged();
+        })
+        .catch((err) => {
+          console.log('err2', err)
           let errorCode = err.code
           let errorMessage = err.message
-        }
-      )
-    } catch(e) {
-      console.log(e)
-    }
-    authStateChanged();
-    newUser(email, password);
-    authStateChanged();
+          console.log(errorCode, errorMessage)
+        })
+      } catch(e) {
+        console.log(e)
+      }
+      authStateChanged();
   }
 
     state = {}

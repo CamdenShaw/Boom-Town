@@ -1,11 +1,11 @@
-import React,  {Component }from 'react'
-import {ItemCard }from './ItemCard'
+import React, { Component }from 'react'
+import { ItemCard }from './ItemCard'
 import Masonry from 'react-masonry-component'
-import {graphql }from 'react-apollo'
+import { graphql }from 'react-apollo'
 import gql from 'graphql-tag'
 
 // import { connect } from 'react-redux'
-import {getCardItems }from '../../redux/modules'
+import { getCardItems }from '../../redux/modules'
 
 class CardFetchItems extends Component {
 
