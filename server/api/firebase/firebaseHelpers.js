@@ -21,8 +21,9 @@ export const getUser = (id) => {
     firebaseDB.ref('/users/${id}')
             .once('value')
             .then((snapshot) => {
+              console.log(snapshot)
               resolve({
-              ...snapshot.val(),
+               ...snapshot.val(),
               id:id
               })
             }).catch(e => console.log(e))

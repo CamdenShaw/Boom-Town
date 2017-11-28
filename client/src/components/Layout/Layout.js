@@ -13,12 +13,12 @@ const thisUrl = window.location.href
 
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        { store.users && thisUrl !== `${loginUrl}?` && <HeaderContainer />}
+        { thisUrl !== `${loginUrl}?` && <HeaderContainer />}
         <div className="appContent">
             { children }
         </div>
-        { store.users  && thisUrl !== `${loginUrl}?` && thisUrl !== 'http://localhost:3000/share' && <ShareButton />}
-        { store.users && thisUrl !== `${loginUrl}?` && <Footer /> }
+        { thisUrl !== `${loginUrl}?` && thisUrl !== 'http://localhost:3000/share' && <ShareButton />}
+        { thisUrl !== `${loginUrl}?` && <Footer /> }
     </div>
 );
 

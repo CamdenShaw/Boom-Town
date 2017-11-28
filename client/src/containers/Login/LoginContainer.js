@@ -14,7 +14,6 @@ import Login from './Login';
 function authStateChanged() {
   firebase.auth().onAuthStateChanged(function(user) { 
     user ? store.dispatch(userAuthorized(user)) : store.dispatch(notAuthorized())
-    user && <Redirect to='/' />
   })
 }
 

@@ -8,7 +8,7 @@ const typeDefs = `
   type User {
     id: ID!
     email: String!
-    fullname: String!
+    fullname: String
     bio: String
     itemsowned: [Item]
     itemsborrowed: [Item]

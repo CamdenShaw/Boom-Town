@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 import { fetchFunction, fetchStacked, createNewItem } from './jsonHelpers'
 import { database } from '../index'
+import { getUsers, getUser } from './firebase/firebaseHelpers'
 
 const resolversFunction = {
     Query: {
@@ -12,10 +13,10 @@ const resolversFunction = {
             return context.loaders.GetItem.load(id)
         },
         users() {
-            return fetchFunction('users')
+            return getUsers()
         },
         user(root, { id }) {
-            return fetchFunction('users', id)
+            return getUser(id)
         }
     },
     Item: {
