@@ -1,7 +1,8 @@
 import { makeExecutableSchema } from 'graphql-tools'
 
-import fbResolvers from './firebase/firebaseResolvers'
+// import fbResolvers from './firebase/firebaseResolvers'
 // import ResolverFunctions from "./psql-server/pgResolvers"
+import resolvers from './resolver'
 
 const typeDefs = `
   type User {
@@ -30,7 +31,7 @@ const typeDefs = `
   }
   type Query {
     items: [Item]
-    item(id: ID!): Item
+    item(id: ID!): [Item]
     users: [User]
     user(id: ID!): User 
   }
@@ -47,7 +48,11 @@ const typeDefs = `
 //   typeDefs,
 //   ResolverFunctions
 // })
+// export default makeExecutableSchema({
+//   typeDefs,
+//   fbResolvers
+// })
 export default makeExecutableSchema({
   typeDefs,
-  fbResolvers
+  resolvers
 })

@@ -13,11 +13,19 @@ const initPostgres = (app) => {
   })
 
   return {
+    getItem(id){
+      return pgClient.query(`SELECT * FROM items WHERE id = ${id}`).then(res => res.rows)
+    },
+    getItemByOwner(id){
+      return pgClient.query(`SELECT * FROM items WHERE itemowner = '${id}'`).then(res => res.rows)
+    },
+    getItemByBorrowed(id){
+      return pgClient.query(`SELECT * FROM items WHERE borrower = '${id}'`).then(res => res.rows)
+    },
     getItems() {
-        return pgClient.query('SELECT * FROM items').then(res => res.rows)
+      return pgClient.query(`SELECT * FROM items`).then(res => res.rows)
     }
   }
-  
 }
 
 export default initPostgres

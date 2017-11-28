@@ -2,31 +2,33 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import cors from 'cors'
-import fbLoaders from './api/firebase/firebaseLoaders'
+// import fbLoaders from './api/firebase/firebaseLoaders'
+import createLoaders from './api/loaders'
 import initPostgres from './api/psql-server/pgResource'
-import initConfigs from './api/psql-server/pgConfig'
+import initConfigs from './api/psql-server/config'
+
 import schema from './api/schema'
 
 const app = express();
 const PORT = process.env.PORT
 
-initConfigs(app);
-export const database = initPostgres(app);
+initConfigs(app)
+export const database = initPostgres(app)
 
 const GQL_PORT = 3010
 
 app.use('*', cors())
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname))
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
   schema,
-  context: { loaders: fbLoaders() }
-  }))
+  context: { loaders: createLoaders() }
+}))
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
-app.listen(PORT, init);
+app.listen(PORT, init)
 
 function init(err) {
   !err && console.log(`Express was started on port ${PORT}`)
