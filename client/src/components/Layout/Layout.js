@@ -8,14 +8,16 @@ import { HeaderContainer } from '../../containers/Header'
 import Footer from '../../containers/Footer'
 import ShareButton from '../common/ShareButton'
 
+const p404 = 'http://localhost:3000/404'
+
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        <HeaderContainer />
+        { window.location.href !== p404 && <HeaderContainer /> }
         <div className="appContent">
             { children }
         </div>
-        <ShareButton />
-        <Footer />
+        { window.location.href !== p404 && <ShareButton /> }
+        { window.location.href !== p404 && <Footer /> }
     </div>
 );
 
