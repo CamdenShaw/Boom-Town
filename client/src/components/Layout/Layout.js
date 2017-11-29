@@ -13,7 +13,7 @@ const thisUrl = window.location.href
 
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        { thisUrl !== loginUrl && thisUrl !== `${loginUrl}?` && <HeaderContainer />}
+        <HeaderContainer />
         <div className="appContent">
             { children }
         </div>

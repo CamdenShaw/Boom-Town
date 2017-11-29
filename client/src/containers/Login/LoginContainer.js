@@ -69,7 +69,7 @@ class LoginContainer extends Component {
 
     render() {
       let { loading, auth } = this.props
-      return loading ? <div>loading</div> : auth ? <Login login={this.handleSubmit} /> : <Redirect to={'/'} />
+      return loading ? <div>loading</div> : auth ? <Redirect to={'/'} /> : <Login login={this.handleSubmit} /> 
     }
 }
 
@@ -77,7 +77,7 @@ function mapStateToProps(state) {
   const values = formValueSelector("loginForm")
   return {
     newUser: values(state, "email", "password"),
-    auth: state.auth.user,
+    auth: state.auth.auth,
     loading: state.auth.isLoading
   }
 }
