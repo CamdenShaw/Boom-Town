@@ -44,13 +44,11 @@ class HeaderContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.state.thisUrl)
-    return this.state.checkUrl !== this.urlSlicer
+    return this.state.checkUrl === this.urlSlicer()
   }
 
   render() {
     let { checkUrl } = this.state
-    console.log(checkUrl)
     if(checkUrl  === 'share' || checkUrl === 'login') return null
     else return (
       <AppBar
