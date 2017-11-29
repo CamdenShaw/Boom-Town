@@ -9,33 +9,30 @@ const resolversFunction = {
             return database.getItems()
         },
         item(root, { id }, context) {
-            console.log(id)
             return context.loaders.GetItem.load(id)
         },
         users() {
             return getUsers()
         },
-        user(root, { id }) {
-            return getUser(id)
+        async user(root, { id }, context) {
+            return await context.loaders.GetUser.load(id)
         }
     },
     Item: {
         async itemowner(item, arg, context) {
-            return await context.loaders.ItemOwner.load(item.itemowner)
+            return await context.loaders.GetUser.load(item.itemowner)
         },
         async borrower(item, arg, context) {
-            if(!item.borrower) return ''
-            return await context.loaders.ItemBorrower.load(item.borrower)
+            if(item.borrower === null) return null
+            return await context.loaders.GetUser.load(item.borrower)
         }
     },
     User: {
-        itemsowned(user, arg, context) {
-            console.log('itemsowned', user)
-            return context.loaders.UserOwnedItems.load(user.id)
+        async itemsowned(user, arg, context) {
+            return await context.loaders.UserOwnedItems.load(user.id)
         },
-        itemsborrowed(user, arg, context) {
-            console.log("itemsborrowed", user)
-            return context.loaders.UserBorrowedItems.load(user.id)
+        async itemsborrowed(user, arg, context) {
+            return await context.loaders.UserBorrowedItems.load(user.id)
         }
     },
     Mutation: {

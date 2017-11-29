@@ -17,9 +17,7 @@ componentDidMount() {
   render() {
 
     const { data } = this.props
-    if (data.loading) return <p> loading </p>
-
-    console.log('CardFetch', data, 'props', this.props)
+    if (data.loading) return <p>loading</p>
 
     return (
       <Masonry className='item-gallery' elementType={'ul'} >

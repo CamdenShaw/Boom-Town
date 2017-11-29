@@ -9,7 +9,6 @@ export const ItemCard = ({ fetchItem }) => {
   const userName = fetchItem.itemowner.fullname
   const userEmail = fetchItem.itemowner.email
   // const borrower = fetchItem.borrower.fullname
-  // console.log(userName, userEmail)
   return (
     <Card containerStyle={{ maxHeight: '100%', padding: 0, margin: 0 }}>
       <CardMedia style={{margin: 0}}

@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router-dom'
+import * as firebase from 'firebase'
+import { connect } from 'react-redux'
+import { notAuthorized } from '../../redux/modules/authReducer'
 
 class Logout extends Component {
 
+  logOut = () => {
+    firebase.auth().signOut()
+  }
+
   render() {
     return (
-      <Link to="/login"><RaisedButton label='Logout' labelColor='white' backgroundColor='#343434' /></Link>
+      <RaisedButton onClick={() => this.logOut()} secondary={true} label='Logout' />
     )
   }
 
 }
 
-export default Logout
+export default connect()(Logout)

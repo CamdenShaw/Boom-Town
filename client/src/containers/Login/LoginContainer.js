@@ -44,9 +44,7 @@ class LoginContainer extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('You clicked the login button.', e);
     const {email, password} =  this.props.newUser;
-    console.log(email, password, this.props.newUser, firebase)
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
         .then(console.log('success'))
@@ -70,17 +68,17 @@ class LoginContainer extends Component {
     state = {}
 
     render() {
-      console.log(this.props.newUser);
-        return (
-            <Login login={this.handleSubmit} />
-        );
+      let { loading, auth } = this.props
+      return loading ? <div>loading</div> : auth ? <Login login={this.handleSubmit} /> : <Redirect to={'/'} />
     }
 }
 
 function mapStateToProps(state) {
   const values = formValueSelector("loginForm")
   return {
-    newUser: values(state, "email", "password")
+    newUser: values(state, "email", "password"),
+    auth: state.auth.user,
+    loading: state.auth.isLoading
   }
 }
 

@@ -5,11 +5,9 @@ const jsonServer = 'http://localhost:3001'
 const expressServer = 'http://localhost:3011'
 
 export const fetchFunction = (stuff, uri = '') => {
-    console.log('jsonHelper', stuff, uri)
     let x = fetch(`${jsonServer}/${stuff}/${uri}`)
                 .then(response => response.json())
                 .catch(err => console.log(err))
-    console.log(x)
     return x
 }
 
@@ -19,7 +17,6 @@ export const fetchStacked = (stuff, stack = '', uri = '') => {
 
 export const fetchStackedLoader = (stuff, stack = '', uri = '') => {
     //http://localhost:3001/items/?borrower=wtC3mP5BIuNLHKa0gcOdTzsIRwC2
-    console.log(`${jsonServer}/${stuff}/?${stack}=${uri}`)
     return fetch(`${jsonServer}/${stuff}/?${stack}=${uri}`)
                 .then(response => response.json())
                 .catch(err => console.log(err))

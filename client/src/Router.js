@@ -29,10 +29,10 @@ class Routers extends Component {
       <Router>
         <Layout>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/profile" component={Profile} />
+            <PrivateRouter exact path="/" component={Home} />
+            <PrivateRouter path="/profile" component={Profile} />
             <Route path="/login" component={Login} />
-            <Route path="/share" component={Share} />
+            <PrivateRouter path="/share" component={Share} />
             <Route path="/404" component={p404} />
             <Route component={NotFound} />
           </Switch>
@@ -42,4 +42,4 @@ class Routers extends Component {
   }
 }
 
-export default Routers;
+export default Routers

@@ -18,10 +18,9 @@ const firebaseDB = firebase.database();
 
 export const getUser = (id) => {
   return new Promise((resolve, reject) => {
-    firebaseDB.ref('/users/${id}')
+    firebaseDB.ref(`/users/${id}`)
             .once('value')
             .then((snapshot) => {
-              console.log(snapshot)
               resolve({
                ...snapshot.val(),
               id:id
@@ -35,13 +34,10 @@ export const getUsers = () => {
     firebaseDB.ref('/users')
             .once('value')
             .then((snapshot) => {
-              const userList = [];
-              const users = snapshot.val();
-
-              Object.keys(users).forEach(id => userList.push({
-                 ...user[id], id
-              }))
-              resolve(userList)
+              resolve({
+                ...snapshot.val(),
+                id:id
+              })
             }).catch(e => console.log(e))
   })
 }

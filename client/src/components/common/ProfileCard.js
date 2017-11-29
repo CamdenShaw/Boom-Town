@@ -8,5 +8,4 @@ import Gravatar from 'react-gravatar'
 export const ProfileCard = ({ fetchItem }) => {
   // const borrower = fetchItem.borrower.fullname
   return console.log(fetchItem)
-  
 }
