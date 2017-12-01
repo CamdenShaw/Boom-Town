@@ -8,7 +8,20 @@ import Gravatar from 'react-gravatar'
 export const ItemCard = ({ fetchItem }) => {
   const userName = fetchItem.itemowner.fullname
   const userEmail = fetchItem.itemowner.email
-  // const borrower = fetchItem.borrower.fullname
+  let x = true
+  let y = ""
+  let tags = ""
+  if(fetchItem.tags) {
+    Object.values(fetchItem.tags).forEach(tag => {
+      console.log(tag.tag)
+      if(x === false) y = ', '
+      if(x === true) x = false
+      tags += `${y}${tag.tag}` 
+    }) 
+  } else {
+    tags = "No Tags"
+  }
+  console.log(tags)
   return (
     <Card containerStyle={{ maxHeight: '100%', padding: 0, margin: 0 }}>
       <CardMedia style={{margin: 0}}
@@ -29,7 +42,7 @@ export const ItemCard = ({ fetchItem }) => {
       />
       <CardTitle
         title={fetchItem.title ? fetchItem.title :"test Card title" }
-        subtitle={  fetchItem.tags ? fetchItem.tags : "No Tags" }
+        subtitle={ tags }
       />
       <CardText>
         { fetchItem.description ? fetchItem.description :

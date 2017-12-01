@@ -1,8 +1,8 @@
-import { makeExecutableSchema } from 'graphql-tools'
+import { makeExecutableSchema } from "graphql-tools"
 
 // import fbResolvers from './firebase/firebaseResolvers'
 // import ResolverFunctions from "./psql-server/pgResolvers"
-import resolvers from './resolver'
+import resolvers from "./resolver"
 
 const typeDefs = `
   type User {
@@ -16,7 +16,8 @@ const typeDefs = `
 
   type Tag {
     id: ID
-    title: String
+    tag: String
+    itemstagged: [Item]
   }
 
   type Item {
@@ -34,6 +35,8 @@ const typeDefs = `
     item(id: ID!): [Item]
     users: [User]
     user(id: ID!): User 
+    tags: [Tag]
+    tag(id: ID!): [Tag]
   }
   type Mutation {
     addItem (
@@ -53,6 +56,6 @@ const typeDefs = `
 //   fbResolvers
 // })
 export default makeExecutableSchema({
-  typeDefs,
-  resolvers
+    typeDefs,
+    resolvers
 })

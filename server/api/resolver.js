@@ -1,7 +1,7 @@
-import fetch from 'node-fetch'
-import { fetchFunction, fetchStacked, createNewItem } from './jsonHelpers'
-import { database } from '../index'
-import { getUsers, getUser } from './firebase/firebaseHelpers'
+import fetch from "node-fetch"
+import { fetchFunction, fetchStacked, createNewItem } from "./jsonHelpers"
+import { database } from "../index"
+import { getUsers, getUser } from "./firebase/firebaseHelpers"
 
 const resolversFunction = {
     Query: {
@@ -14,8 +14,14 @@ const resolversFunction = {
         users() {
             return getUsers()
         },
-        async user(root, { id }, context) {
-            return await context.loaders.GetUser.load(id)
+        user(root, { id }, context) {
+            return context.loaders.GetUser.load(id)
+        },
+        tags() {
+            return database.getTags()
+        },
+        tag(root, { id }, context) {
+            return context.loaders.GetTag.load(id)
         }
     },
     Item: {
@@ -23,8 +29,11 @@ const resolversFunction = {
             return await context.loaders.GetUser.load(item.itemowner)
         },
         async borrower(item, arg, context) {
-            if(item.borrower === null) return null
+            if (item.borrower === null) return null
             return await context.loaders.GetUser.load(item.borrower)
+        },
+        async tags(item, arg, context) {
+            return await database.getTags(item.id)
         }
     },
     User: {
@@ -35,9 +44,14 @@ const resolversFunction = {
             return await context.loaders.UserBorrowedItems.load(user.id)
         }
     },
+    Tag: {
+        async itemstagged(tag, arg, context) {
+            return await context.loaders.ItemsTagged.load(tag.id)
+        },
+    },
     Mutation: {
-        addItem(root, { title, imageurl, description, itemowner, }) {
-            return createNewItem( title, imageurl, description, itemowner )
+        addItem(root, { title, imageurl, description, itemowner }) {
+            return createNewItem(title, imageurl, description, itemowner)
         }
     }
 }
