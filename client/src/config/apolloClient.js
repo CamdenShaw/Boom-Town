@@ -1,9 +1,9 @@
-import ApolloClient, { createNetworkInterface } from 'react-apollo';
+import ApolloClient, { createNetworkInterface } from "react-apollo"
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:3010/graphql'
-});
+    uri: "http://localhost:3010/graphql"
+})
 
-const client = new ApolloClient({ networkInterface });
+const client = new ApolloClient({ networkInterface })
 
-export default client;
+export default client

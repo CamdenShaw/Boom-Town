@@ -1,8 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
+import AppBar from "material-ui/AppBar"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { Redirect } from "react-router-dom"
 
-class Footer extends Component {
+import HeaderLeft from './HeaderLeft'
+import HeaderRight from "./HeaderRight"
 
-  constructor() {
+class HeaderContainer extends Component {
+  constructor(){
     super()
     this.state = {
       thisUrl: window.location.href,
@@ -40,17 +46,25 @@ class Footer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.state.checkUrl, this.urlSlicer())
     return this.state.checkUrl === this.urlSlicer()
   }
 
   render() {
     let { checkUrl } = this.state
-    if(checkUrl === 'share' || checkUrl === 'login') return null
+    if(checkUrl  === 'share' || checkUrl === 'login') return null
     else return (
-      <p> &copy; 2017 Boomtown Corp. All Rights Reserved </p>
+      <AppBar
+          titleStyle={{display: 'none'}}
+          style={{
+            display: 'flex',
+            width: '100vw',
+            height: 64,
+            justifyContent: 'space-between'
+          }}
+          iconElementLeft={<HeaderLeft />}
+          iconElementRight={<HeaderRight /> }
+      />
     )
   }
 }
-
-export default Footer
+export default HeaderContainer

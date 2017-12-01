@@ -1,27 +1,18 @@
 import React, { Component } from 'react'
-import { ItemCard } from './ItemCard'
 import Masonry from 'react-masonry-component'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-// import { connect } from 'react-redux'
+import { ItemCard } from '../ItemCard'
 import { getCardItems } from '../../redux/modules'
 
 class CardFetchUsers extends Component {
-
-  componentDidMount() {
-
-    // this.props.getCardItems()
-  }
 
   render() {
 
     const { data } = this.props
 
-    console.log('CardFetchUsers', data)
-
     return ( <Masonry className={'item-gallery'} elementType={'ul'} >
-    
       {
         !data.loading ? 
         data.users.map((item) =>

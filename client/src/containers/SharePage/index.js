@@ -1,5 +1,5 @@
-import ShareContainer from './ShareContainer';
-import ShareForm from './ShareForm';
+import ShareContainer from "./ShareContainer"
+import ShareForm from "./ShareForm"
 
-export { ShareForm };
-export default ShareContainer;
+export { ShareForm }
+export default ShareContainer

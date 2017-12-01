@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { NewUserForm } from '../NewUserForm/NewUserForm'
 import * as firebase from 'firebase'
 import { connect } from 'react-redux'
-import { reduxForm, formValueSelector, Field } from 'redux-form'
 import { Route, Redirect } from 'react-router-dom'
+
+import { reduxForm, formValueSelector, Field } from 'redux-form'
 import { store } from '../../index'
 import { userAuthorized, notAuthorized } from '../../redux/modules/authReducer'
-
+import NewUserForm from '../../components/NewUserForm'
 import Login from './Login';
+
 
 
 function authStateChanged() {

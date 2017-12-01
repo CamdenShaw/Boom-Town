@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
 
 class ShareContainer extends Component {
-  state = {  }
-  render() {
-    return (
-      <div>Sharing is Caring</div>
-    );
-  }
+    state = {}
+    render() {
+        return <div>Sharing is Caring</div>
+    }
 }
 
-export default ShareContainer;
+export default ShareContainer

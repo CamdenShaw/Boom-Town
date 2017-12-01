@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { ApolloProvider } from 'react-apollo'
+import muiTheme from './config/theme';
+import * as firebase from 'firebase'
+
 import registerServiceWorker from './registerServiceWorker';
 import configStore from './redux/configStore';
-import { ApolloProvider } from 'react-apollo'
 import Routers from './Router';
-import { notAuthorized, userAuthorized } from './redux//modules/authReducer'
-
-
-import './index.css';
-import muiTheme from './config/theme';
-
+import { notAuthorized, userAuthorized } from './redux/modules/authReducer'
 import client from './config/apolloClient'
-import * as firebase from 'firebase'
+import './index.css';
+
+
+
 
 const config = {
     apiKey: "AIzaSyCacootitVuGBMMLraKExCak9LGqgdb-LE",

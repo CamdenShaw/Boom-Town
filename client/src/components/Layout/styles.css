@@ -1,25 +1,25 @@
 .appContentWrapper {
     display: flex;
     min-height: 100%;
-    flex-direction:column;
+    flex-direction: column;
 }
 
 .appContent {
-  display: flex;
-  margin: 0 auto;
-  max-width: 1140px;
-  width: 100%;
-  flex:1;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1140px;
+    width: 100%;
+    flex: 1;
 }
 
 .item-gallery {
-  margin: 0 20px 20px;
-  width: 1140px;
-  background-color: rgba(0, 0, 0, 0);
+    margin: 0 20px 20px;
+    width: 1140px;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .share {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
 }
