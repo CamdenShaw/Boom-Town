@@ -5,21 +5,14 @@ import gql from "graphql-tag"
 
 import ItemCard from "../../components/ItemCard"
 import { getCardItems } from "../../redux/modules"
+import Home from "./Home"
 
 class HomeContainer extends Component {
     render() {
         const { data } = this.props
         if (data.loading) return <p>loading</p>
 
-        return (
-            <Masonry className="item-gallery" elementType={"ul"}>
-                {data.items.map((item, key) => (
-                    <li key={key} style={{ padding: "1%", width: "33.333333333333%" }}>
-                        <ItemCard fetchItem={item} />
-                    </li>
-                ))}
-            </Masonry>
-        )
+        return <Home data={data} />
     }
 }
 

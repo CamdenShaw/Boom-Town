@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
-import { Link } from 'react-router-dom'
+import React, { Component } from "react"
+import Masonry from "react-masonry-component"
 
-class MyProfile extends Component {
-  render() {
+import ItemCard from "../../components/ItemCard"
+import { getCardItems } from "../../redux/modules"
+
+const Profile = ({ data }) => {
+    if (data.loading) return <p>loading</p>
+    console.log(data)
     return (
-      <Link to="/profile"><RaisedButton label='My Profile' primary /></Link>
+        <Masonry className="item-gallery" elementType={"ul"}>
+            {data.map((item, key) => (
+                <li key={key} style={{ padding: "1%", width: "33.333333333%" }}>
+                    <ItemCard fetchItem={item} />
+                </li>
+            ))}
+        </Masonry>
     )
-  }
 }
 
-export default MyProfile
+export default Profile

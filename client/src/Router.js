@@ -18,7 +18,7 @@ class Routers extends Component {
                 <Layout>
                     <Switch>
                         <PrivateRouter exact path="/" component={Home} />
-                        <PrivateRouter path="/profile" component={Profile} />
+                        <PrivateRouter path="/profile/:userid" component={Profile} />
                         <Route path="/login" component={Login} />
                         <PrivateRouter path="/share" component={SharePage} />
                         <Route path="/404" component={p404} />

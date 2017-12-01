@@ -1,7 +1,5 @@
 import { makeExecutableSchema } from "graphql-tools"
 
-// import fbResolvers from './firebase/firebaseResolvers'
-// import ResolverFunctions from "./psql-server/pgResolvers"
 import resolvers from "./resolver"
 
 const typeDefs = `
@@ -47,14 +45,7 @@ const typeDefs = `
     ): Item
   }
 `
-// export default makeExecutableSchema({
-//   typeDefs,
-//   ResolverFunctions
-// })
-// export default makeExecutableSchema({
-//   typeDefs,
-//   fbResolvers
-// })
+
 export default makeExecutableSchema({
     typeDefs,
     resolvers

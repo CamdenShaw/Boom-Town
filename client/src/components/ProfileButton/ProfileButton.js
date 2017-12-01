@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
-import { Link } from 'react-router-dom'
+import React from "react"
+import RaisedButton from "material-ui/RaisedButton"
+import { Link } from "react-router-dom"
 
-class MyProfile extends Component {
-  render() {
+const MyProfile = ({ userId }) => {
     return (
-
-      <Link to="/profile"><RaisedButton label='My Profile' primary /></Link>
-
+        <Link to={`/profile?id=${userId}`}>
+            <RaisedButton label="My Profile" primary />
+        </Link>
     )
-  }
 }
 
 export default MyProfile

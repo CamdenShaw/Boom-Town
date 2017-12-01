@@ -14,11 +14,12 @@ import home from "../../images/home-tr.svg"
 import image from "../../images/item-placeholder.jpg"
 
 const ItemCard = ({ fetchItem }) => {
+    console.log(fetchItem)
     const userName = fetchItem.itemowner.fullname
     const userEmail = fetchItem.itemowner.email
+    let tags = ""
     let x = true
     let y = ""
-    let tags = ""
     if (fetchItem.tags) {
         Object.values(fetchItem.tags).forEach(tag => {
             console.log(tag.tag)
