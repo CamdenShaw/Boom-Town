@@ -10,14 +10,16 @@ import "./styles.css"
 
 const p404 = "http://localhost:3000/404"
 
-const Layout = ({ children }) => (
-    <div className="appContentWrapper">
-        {window.location.href !== p404 && <Header />}
-        <div className="appContent">{children}</div>
-        {window.location.href !== p404 && <ShareButton />}
-        {window.location.href !== p404 && <Footer />}
-    </div>
-)
+const Layout = ({ children }) => {
+    return (
+        <div className="appContentWrapper">
+            {window.location.href !== p404 && <Header />}
+            <div className="appContent">{children}</div>
+            {window.location.href !== p404 && <ShareButton />}
+            {window.location.href !== p404 && <Footer />}
+        </div>
+    )
+}
 
 Layout.defaultProps = {
     children: null

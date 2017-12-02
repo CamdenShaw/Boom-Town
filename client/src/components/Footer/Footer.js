@@ -12,12 +12,13 @@ class Footer extends Component {
 
     urlSlicer = () => {
         let checkUrl = this.state.thisUrl.slice(this.state.url.length + 1)
-        if (this.state.checkUrl === checkUrl) return checkUrl
+        let checker = checkUrl.slice(0, 5)
+        if (this.state.checkUrl === checker) return checker
         else {
             this.setState({
-                checkUrl: checkUrl.slice(0, 5)
+                checkUrl: checker
             })
-            return checkUrl
+            return checker
         }
     }
 
@@ -40,7 +41,6 @@ class Footer extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log(this.state.checkUrl, this.urlSlicer())
         return this.state.checkUrl === this.urlSlicer()
     }
 

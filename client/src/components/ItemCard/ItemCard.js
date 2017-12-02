@@ -7,6 +7,7 @@ import {
     CardTitle,
     CardText
 } from "material-ui"
+import { Link } from 'react-router-dom'
 import RaisedButton from "material-ui/RaisedButton"
 import Gravatar from "react-gravatar"
 
@@ -14,7 +15,6 @@ import home from "../../images/home-tr.svg"
 import image from "../../images/item-placeholder.jpg"
 
 const ItemCard = ({ fetchItem }) => {
-    console.log(fetchItem)
     const userName = fetchItem.itemowner.fullname
     const userEmail = fetchItem.itemowner.email
     let tags = ""
@@ -22,7 +22,6 @@ const ItemCard = ({ fetchItem }) => {
     let y = ""
     if (fetchItem.tags) {
         Object.values(fetchItem.tags).forEach(tag => {
-            console.log(tag.tag)
             if (x === false) y = ", "
             if (x === true) x = false
             tags += `${y}${tag.tag}`
@@ -30,7 +29,6 @@ const ItemCard = ({ fetchItem }) => {
     } else {
         tags = "No Tags"
     }
-    console.log(tags)
     return (
         <Card containerStyle={{ maxHeight: "100%", padding: 0, margin: 0 }}>
             <CardMedia
@@ -53,13 +51,15 @@ const ItemCard = ({ fetchItem }) => {
                     alt=""
                 />
             </CardMedia>
-            <CardHeader 
-                title={ userName ? userName : "Default Avatar Name" } 
-                subtitle={ fetchItem.created ? fetchItem.created : "Default Avatar Bio" } 
-                avatar={userEmail 
-                    ? <Gravatar style={{borderRadius: '50%'}} email={`${userEmail}`} /> 
-                    : home}
-            />
+            <Link to={`/profile/${fetchItem.itemowner.id}`} > 
+                <CardHeader 
+                    title={ userName ? userName : "Default Avatar Name" } 
+                    subtitle={ fetchItem.created ? fetchItem.created : "Default Avatar Bio" } 
+                    avatar={userEmail 
+                        ? <Gravatar style={{borderRadius: '50%'}} email={`${userEmail}`} /> 
+                        : home}
+                />
+            </Link>
             <CardTitle
                 title={fetchItem.title ? fetchItem.title :"test Card title" }
                 subtitle={ tags }
@@ -76,7 +76,6 @@ const ItemCard = ({ fetchItem }) => {
                         label="Borrow"
                         backgroundColor='#343434'
                         onClick={ (fetchItem) => {
-                            console.log('click')
                             return fetchItem = {...fetchItem, "borrower": "this.user"}
                         }}
                     />

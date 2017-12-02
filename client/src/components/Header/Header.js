@@ -6,6 +6,8 @@ import { Redirect } from "react-router-dom"
 
 import HeaderLeft from './HeaderLeft'
 import HeaderRight from "./HeaderRight"
+import { getUser } from "../../redux/modules/authReducer"
+import userIdFetch from '../../redux/modules/authReducer'
 
 class HeaderContainer extends Component {
   constructor(){
@@ -13,18 +15,24 @@ class HeaderContainer extends Component {
     this.state = {
       thisUrl: window.location.href,
       url: 'http://localhost:3000',
-      checkUrl: ''
+      checkUrl: '',
+      userId: ''
     }
   }
 
+  componentDidMount() {
+    this.props.dispatch(userIdFetch())
+  }
+
   urlSlicer = () => {
-    let checkUrl = this.state.thisUrl.slice(this.state.url.length+1)
-    if(this.state.checkUrl === checkUrl) return checkUrl
+    let checkerUrl = window.location.href.slice(this.state.url.length+1)
+    let checker = checkerUrl.slice(0, 5)
+    if(this.state.checkUrl === checker) return checker
     else {
       this.setState({
-        checkUrl: checkUrl.slice(0, 5)
+        checkUrl: checker
       })
-      return checkUrl
+      return checker
     }
   }
 
@@ -35,25 +43,45 @@ class HeaderContainer extends Component {
     })
   }
 
-  componentWillMount() {
+  componentWillReceiveProps(nextProps){
+    if(this.state.usrId === '' && nextProps.userId) this.setState({
+      userId: nextProps.userId
+    })
+  }
+
+  componentDidMount() {
     this.setUrl()
     this.urlSlicer()
   }
 
-  componentDidUpdate() {
+  componentWillUpdate() {
     this.setUrl()
     this.urlSlicer()
+  }
+
+  componentDidUpdate(){
+    console.log(this.state.thisUrl, window.location.href)
+    if(this.state.thisUrl !== window.location.href){
+      this.setUrl()
+      this.urlSlicer()
+    }
+    // if(this.props.userId == undefined) this.props.dispatch(userIdFetch)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.checkUrl === this.urlSlicer()
+    return (this.state.thisUrl !== window.location.href && this.props.userId == undefined || !this.props.userId || this.state.thisUrl !== window.location.href) 
+  }
+
+  componentWillUnmount(){
+    console.log('unmount header')
   }
 
   render() {
     let { checkUrl } = this.state
-    if(checkUrl  === 'share' || checkUrl === 'login') return null
+    let { userId, auth } = this.props
+    if( checkUrl === 'login') return null
     else return (
-      <AppBar
+        userId ? <AppBar
           titleStyle={{display: 'none'}}
           style={{
             display: 'flex',
@@ -62,9 +90,22 @@ class HeaderContainer extends Component {
             justifyContent: 'space-between'
           }}
           iconElementLeft={<HeaderLeft />}
-          iconElementRight={<HeaderRight /> }
-      />
+          iconElementRight={<HeaderRight curUrl={this.urlSlicer} userId={userId} /> }
+        /> : <p>loading</p>
     )
   }
 }
-export default HeaderContainer
+
+
+HeaderContainer.propTypes = {
+  user: PropTypes.object
+}
+
+function mapStateToProps(state) {
+  return {
+      userId: state.auth.userId,
+      auth: state.auth.auth
+  }
+}
+
+export default connect(mapStateToProps)(HeaderContainer)

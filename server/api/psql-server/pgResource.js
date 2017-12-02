@@ -34,7 +34,6 @@ const initPostgres = app => {
         //     return pgClient.query(`SELECT * FROM tags`).then(res => res.rows)
         // },
         getTag(id) {
-            console.log(id)
             return pgClient
                 .query(`SELECT * FROM tags WHERE id = '${id}'`)
                 .then(res => res.rows)

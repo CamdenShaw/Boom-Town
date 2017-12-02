@@ -6,7 +6,6 @@ import { getCardItems } from "../../redux/modules"
 
 const Profile = ({ data }) => {
     if (data.loading) return <p>loading</p>
-    console.log(data)
     return (
         <Masonry className="item-gallery" elementType={"ul"}>
             {data.map((item, key) => (

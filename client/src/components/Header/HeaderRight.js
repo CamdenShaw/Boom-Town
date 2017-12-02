@@ -1,30 +1,30 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 
 import ProfileButton from "../ProfileButton"
 import Logout from "../Logout"
 
-class HeaderRight extends Component {
-    render() {
-        return (
-            <div
-                className="right-container"
-                style={{
-                    display: "flex",
-                    width: "250px",
-                    justifyContent: "space-around",
-                    marginRight: 12,
-                    marginTop: 6
-                }}
-            >
-                <div className="my-profile-container">
-                    <ProfileButton />
-                </div>
-                <div className="logout-container">
-                    <Logout />
-                </div>
+const HeaderRight = ({ userId, curUrl }) => {
+    console.log("header right", userId, curUrl())
+    return (
+        <div
+            className="right-container"
+            style={{
+                display: "flex",
+                width: "250px",
+                justifyContent: "space-around",
+                marginRight: 12,
+                marginTop: 6
+            }}
+        >
+            <div className="my-profile-container">
+                <ProfileButton onClick={() => {console.log('clicked', curUrl())}} userId={userId} />
             </div>
-        )
-    }
+            <div className="logout-container">
+                <Logout />
+            </div>
+        </div>
+    )
 }
 
 export default HeaderRight

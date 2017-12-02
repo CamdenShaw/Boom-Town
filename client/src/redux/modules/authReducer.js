@@ -27,6 +27,7 @@ export default function(state = { auth: null, user: null, isLoading: null }, act
             return {
                 ...state,
                 user: action.user,
+                userId: action.user.uid,
                 isLoading: false,
                 auth: true
             }

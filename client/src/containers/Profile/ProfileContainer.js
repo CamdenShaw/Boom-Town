@@ -1,12 +1,17 @@
 import React, { Component } from "react"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
+import { connect } from 'react-redux'
 
 import Profile from "./Profile"
 
 class ProfileContainer extends Component {
+
+    id() {
+        return this.props.match.params.userId
+    }
+
     render() {
-        console.log(this.props)
         const { data } = this.props
         return data.loading ? (
             <p>loading</p>
@@ -16,7 +21,7 @@ class ProfileContainer extends Component {
     }
 }
 
-const fetchItemData = gql`
+const fetchItemData =  gql`
     query fetchItemData($id: ID!) {
         user(id: $id) {
             bio
@@ -65,8 +70,18 @@ const fetchItemData = gql`
     }
 `
 
-export default graphql(fetchItemData, {
-    options: {
-        variables: { id: "Qdd5HoEin0OPxNUZcB5sDc7xGHD2" }
+function mapStateToProps(state) {
+    return {
+        auth: state.auth.auth,
+        userId: state.auth.userId
     }
-})(ProfileContainer)
+}
+
+const connectedProfile = connect(mapStateToProps)(ProfileContainer)
+
+export default graphql(fetchItemData, {
+        options: ownProps => ({
+            x: console.log(ownProps),
+            variables: { id: `${ownProps.match.params.userid}`}
+        })
+})(connectedProfile)
