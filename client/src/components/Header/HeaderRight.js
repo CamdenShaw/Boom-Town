@@ -5,7 +5,6 @@ import ProfileButton from "../ProfileButton"
 import Logout from "../Logout"
 
 const HeaderRight = ({ userId, curUrl }) => {
-    console.log("header right", userId, curUrl())
     return (
         <div
             className="right-container"
@@ -18,7 +17,7 @@ const HeaderRight = ({ userId, curUrl }) => {
             }}
         >
             <div className="my-profile-container">
-                <ProfileButton onClick={() => {console.log('clicked', curUrl())}} userId={userId} />
+                <ProfileButton userId={userId} />
             </div>
             <div className="logout-container">
                 <Logout />

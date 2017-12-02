@@ -60,7 +60,6 @@ class HeaderContainer extends Component {
   }
 
   componentDidUpdate(){
-    console.log(this.state.thisUrl, window.location.href)
     if(this.state.thisUrl !== window.location.href){
       this.setUrl()
       this.urlSlicer()
