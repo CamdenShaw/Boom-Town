@@ -60,15 +60,11 @@ class HeaderContainer extends Component {
   }
 
   componentDidUpdate(){
-    if(this.state.thisUrl !== window.location.href){
-      this.setUrl()
-      this.urlSlicer()
-    }
-    // if(this.props.userId == undefined) this.props.dispatch(userIdFetch)
+    if(this.state.thisUrl !== window.location.href) this.forceUpdate()
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.state.thisUrl !== window.location.href && this.props.userId == undefined || !this.props.userId || this.state.thisUrl !== window.location.href) 
+    return (this.state.thisUrl !== window.location.href && this.props.userId == undefined || !this.props.userId)
   }
 
   componentWillUnmount(){
@@ -89,7 +85,7 @@ class HeaderContainer extends Component {
             justifyContent: 'space-between'
           }}
           iconElementLeft={<HeaderLeft />}
-          iconElementRight={<HeaderRight curUrl={this.urlSlicer} userId={userId} /> }
+          iconElementRight={<HeaderRight userId={userId} /> }
         /> : <p>loading</p>
     )
   }

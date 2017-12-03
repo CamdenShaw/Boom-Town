@@ -7,10 +7,12 @@ import "./styles.css"
 const Share = () => {
     return (
         <div className="share-container">
-            <ShareImage className="share-image" />
-            <ShareForm className="share-form" />
-            {/* <div className="share-image">share image</div>
-            <div className="share-form">share form</div> */}
+            <div className="share-image">
+                <ShareImage />
+            </div>
+            <div className="share-form">
+                <ShareForm />
+            </div>
         </div>
     )
 }

@@ -81,7 +81,6 @@ const connectedProfile = connect(mapStateToProps)(ProfileContainer)
 
 export default graphql(fetchItemData, {
         options: ownProps => ({
-            x: console.log(ownProps),
             variables: { id: `${ownProps.match.params.userid}`}
         })
 })(connectedProfile)

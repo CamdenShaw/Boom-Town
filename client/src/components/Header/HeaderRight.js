@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 import ProfileButton from "../ProfileButton"
 import Logout from "../Logout"
 
-const HeaderRight = ({ userId, curUrl }) => {
+const HeaderRight = ({ userId }) => {
+    console.log(userId)
     return (
         <div
             className="right-container"

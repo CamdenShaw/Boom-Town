@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import {
     Card,
     CardActions,
-    CardHeader,
     CardMedia,
     CardTitle,
     CardText
@@ -10,11 +9,17 @@ import {
 import { Link } from 'react-router-dom'
 import RaisedButton from "material-ui/RaisedButton"
 import Gravatar from "react-gravatar"
+import PropTypes from 'prop-types'
 
+import CardAuthor from "../CardContent/CardAuthor"
+import CardImage from "../CardContent/CardImage"
+import CardContentText from '../CardContent/CardContentText'
+import CardButton from '../CardContent/CardButton'
+import CardTitleSubtitle from "../CardContent/CardTitleSubtitle"
 import home from "../../images/home-tr.svg"
-import image from "../../images/item-placeholder.jpg"
+import placeholderImage from "../../images/item-placeholder.jpg"
 
-const ItemCard = ({ fetchItem }) => {
+const ItemCard = ({ fetchItem, borrowItem }) => {
     const userName = fetchItem.itemowner.fullname
     const userEmail = fetchItem.itemowner.email
     let tags = ""
@@ -31,57 +36,27 @@ const ItemCard = ({ fetchItem }) => {
     }
     return (
         <Card containerStyle={{ maxHeight: "100%", padding: 0, margin: 0 }}>
-            <CardMedia
-                style={{ margin: 0 }}
-                overlay={
-                    fetchItem.borrower && (
-                        <CardTitle
-                            style={{ margin: 0 }}
-                            subtitle={fetchItem.borrower && "Unavailable"}
-                        />
-                    )
-                }
-            >
-                <img
-                    src={
-                        fetchItem.imageurl
-                            ? fetchItem.imageurl
-                            : "../../images/item-placeholder.jpg"
-                    }
-                    alt=""
-                />
-            </CardMedia>
+            <CardImage borrower={fetchItem.borrower} title={fetchItem.title} imageUrl={fetchItem.imageurl} />
             <Link to={`/profile/${fetchItem.itemowner.id}`} > 
-                <CardHeader 
-                    title={ userName ? userName : "Default Avatar Name" } 
-                    subtitle={ fetchItem.created ? fetchItem.created : "Default Avatar Bio" } 
-                    avatar={userEmail 
-                        ? <Gravatar style={{borderRadius: '50%'}} email={`${userEmail}`} /> 
-                        : home}
-                />
+                <CardAuthor userName={userName} created={fetchItem.created} userEmail={userEmail} />
             </Link>
-            <CardTitle
-                title={fetchItem.title ? fetchItem.title :"test Card title" }
-                subtitle={ tags }
-            />
-            <CardText>
-                { fetchItem.description 
-                    ? fetchItem.description 
-                    : `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`
-                }
-            </CardText>
-            <CardActions>{ !fetchItem.borrower 
-                &&  <RaisedButton
-                        secondary={true}
-                        label="Borrow"
-                        backgroundColor='#343434'
-                        onClick={ (fetchItem) => {
-                            return fetchItem = {...fetchItem, "borrower": "this.user"}
-                        }}
-                    />
-            } </CardActions>
+            <CardTitleSubtitle title={fetchItem.title} tags={tags} />
+            <CardContentText description={fetchItem.description} />
+            <CardButton borrower={fetchItem.borrower} borrowItem={borrowItem} />
         </Card>
     )
+}
+
+ItemCard.defaultProps = {
+    fetchItem: {
+        itemowner: {
+            fullname: null,
+            email: null
+        },
+        borrower: false,
+        imageurl: placeholderImage,
+        description: 'Profound item description'
+    }
 }
 
 export default ItemCard
