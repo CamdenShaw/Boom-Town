@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import SelectField from "material-ui/SelectField"
-import MenuItem from "material-ui/MenuItem"
+import { SelectField, MenuItem } from "material-ui"
 
 const tags = [
     { value: 0, name: "Electronics" },
@@ -13,43 +12,41 @@ const tags = [
 ]
 
 class Search extends Component {
-    state = {
-        values: []
-    }
-
-    handleChange = (event, index, values) => this.setState({ values })
-
-    selectionRenderer = values => {
-        switch (values.length) {
-            case 0:
-                return ""
-            case 1:
-                return tags[values[0]].name
-            default:
-                return `${values.length} names selected`
+    constructor(props) {
+        super(props)
+        this.state = {
+            values: []
         }
     }
 
-    menuItems(tags) {
+    handleChange = (event, index, values) => {
+        console.log(values)
+        this.setState({ values })
+    }
+
+    menuItems(values) {
         return tags.map(tag => (
             <MenuItem
                 key={tag.value}
                 insetChildren={true}
-                checked={this.state.values.indexOf(tag.value) > -1}
+                checked={values && values.indexOf(tag.value) > -1}
                 value={tag.value}
                 primaryText={tag.name}
             />
         ))
     }
+
     render() {
+        const { values } = this.props
         return (
             <SelectField
                 multiple={true}
                 floatingLabelText="Filtered by Tag"
-                value={this.state.tags}
+                value={values}
                 style={{ top: -24, margin: "0px 20px" }}
+                onChange={this.props.submitValues}
             >
-                {this.menuItems(tags)}
+                {this.menuItems(values)}
             </SelectField>
         )
     }

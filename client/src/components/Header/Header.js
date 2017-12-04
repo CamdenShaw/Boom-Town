@@ -67,10 +67,6 @@ class HeaderContainer extends Component {
     return (this.state.thisUrl !== window.location.href && this.props.userId == undefined || !this.props.userId)
   }
 
-  componentWillUnmount(){
-    console.log('unmount header')
-  }
-
   render() {
     let { checkUrl } = this.state
     let { userId, auth } = this.props

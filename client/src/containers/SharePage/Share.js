@@ -7,14 +7,18 @@ import "./styles.css"
 
 const Share = ({ imageUrl, title, grabImage, fetchItem, loading, ...props }) => {
     fetchItem.imageurl = imageUrl
-    console.log(props)
     return (
         <div className="share-container">
             <div className="share-image">
                 <ShareImage fetchItem={fetchItem} />
             </div>
             <div className="share-form">
-                <ShareForm loading={loading} grabImage={grabImage} {...props} />
+                <ShareForm
+                    imageUrl={fetchItem.imageurl}
+                    loading={loading}
+                    grabImage={grabImage}
+                    {...props}
+                />
             </div>
         </div>
     )

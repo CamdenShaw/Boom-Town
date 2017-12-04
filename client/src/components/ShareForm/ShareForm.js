@@ -7,6 +7,7 @@ import {
     StepContent,
 } from 'material-ui/Stepper'
 
+import placeholderImage from "../../images/item-placeholder.jpg"
 import Search from "../Search"
 import "./styles.css"
 
@@ -24,21 +25,16 @@ class ShareForm extends React.Component {
         this.state = {
             finished: false,
             stepIndex: 0,
-            fetchItem: {
-                itemowner: "",
-                itemurl: "",
-                description: "",
-                tags: [],
-                title: ""
-            }
+            step2Enabled: false,
+            title: ''
         }
     };
 
     handleNext = () => {
         const {stepIndex} = this.state;
         this.setState({
-        stepIndex: stepIndex + 1,
-        finished: stepIndex >= 2,
+            stepIndex: stepIndex + 1,
+            finished: stepIndex >= 2,
         });
     };
 
@@ -58,8 +54,9 @@ class ShareForm extends React.Component {
                 label={stepIndex === 3 ? 'Confirm' : 'Next'}
                 disableTouchRipple={true}
                 disableFocusRipple={true}
-                onClick={this.handleNext}
+                onClick={stepIndex === 3 ? this.props.submit : this.handleNext}
                 style={{marginRight: 12}}
+                disabled={stepIndex === 0 ? this.props.imageUrl === placeholderImage : stepIndex === 1 ? !this.state.step2Enabled : false}
             />
             {step > 0 && (
                 <RaisedButton
@@ -72,7 +69,20 @@ class ShareForm extends React.Component {
                 />
             )}
             </div>
-        )   ;
+        )
+    }
+
+    handleChange = (e) => {
+        if(e.target.value.length > 1) this.setState({
+            step2Enabled: true
+        })
+        else this.setState({
+            step2Enabled: false
+        })
+    }
+
+    componentDidUpdate() {
+        this.props.imageUrl !== placeholderImage && this.props.loading === false && this.state.stepIndex === 0 && this.handleNext()
     }
 
     render() {
@@ -92,7 +102,6 @@ class ShareForm extends React.Component {
                 : <RaisedButton overlayStyle={{paddingLeft: 20, paddingRight: 20}} buttonStyle={{textTransform: "uppercase"}}className="image-button" labelStyle={{height: "100%", width: "100%", opacity: 0, padding: 0, position: "absolute", left: 0}} children="select an image" label={
                     <input onChange={e =>{ 
                         grabImage(e)
-                        this.props.loading === false && this.handleNext()
                     }
                     } className="image-input" type="file" />} />}
                 {this.renderStepActions(0)}
@@ -102,9 +111,24 @@ class ShareForm extends React.Component {
                 <StepLabel>Add a Title and Description</StepLabel>
                 <StepContent>
                     <p className="step-content" >Folks need to know what you're sharing.  Give them a clue by adding a title & description.</p>
-                    <TextField fullWidth={true} hintText="Title" floatingLabelText="Title" />
-                    <TextField fullWidth={true} hintText="Description" floatingLabelText="Description" multiLine={true} rows={4} />
-                    {this.renderStepActions(1)}
+                    <TextField 
+                        onChange={e => this.handleChange(e)} 
+                        onBlur={e => {
+                            this.setState({title: e.target.value})
+                            this.props.handleText(e, 'title')
+                        }} 
+                        fullWidth={true} 
+                        hintText="Title" 
+                        floatingLabelText="Title"
+                        floatingLabelShrinkStyle={{color: "white"}}
+                    />
+                    <TextField onBlur={e => this.props.handleText(e, 'description')}
+                        fullWidth={true}
+                        hintText="Description"
+                        floatingLabelText="Description"
+                        floatingLabelShrinkStyle={{color: "white"}}
+                        multiLine={true} rows={4} />
+                        {this.renderStepActions(1)}
                 </StepContent>
             </Step>
             <Step>
@@ -113,7 +137,7 @@ class ShareForm extends React.Component {
                 <p className="step-content" >
                     To share an item, you will add it to our list of categories.  You can select multiple categories.
                 </p>
-                <Search />
+                <Search values={this.props.values} submitValues={this.props.submitValues} />
                 {this.renderStepActions(2)}
                 </StepContent>
             </Step>
@@ -123,8 +147,7 @@ class ShareForm extends React.Component {
                 <p className="step-content" >
                     Great!  If you're happy with everything, tap the 'confirm' button.
                 </p>
-                <Search />
-                {this.renderStepActions(2)}
+                {this.renderStepActions(3)}
                 </StepContent>
             </Step>
             </Stepper>

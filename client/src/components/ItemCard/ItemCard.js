@@ -20,7 +20,6 @@ import home from "../../images/home-tr.svg"
 import placeholderImage from "../../images/item-placeholder.jpg"
 
 const ItemCard = ({ fetchItem, borrowItem }) => {
-    console.log(fetchItem)
     const userName = fetchItem.itemowner.fullname
     const userEmail = fetchItem.itemowner.email
     let tags = ""

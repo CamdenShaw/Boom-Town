@@ -13,8 +13,8 @@ import Gravatar from "react-gravatar"
 import home from "../../images/home-tr.svg"
 import image from "../../images/item-placeholder.jpg"
 
-const ProfileCard = ({ fetchItem }) => {
-    return console.log(fetchItem)
+const ProfileCard = ({ userInfo }) => {
+    return console.log(userInfo)
 }
 
 export default ProfileCard
