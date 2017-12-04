@@ -5,7 +5,6 @@ import ProfileButton from "../ProfileButton"
 import Logout from "../Logout"
 
 const HeaderRight = ({ userId }) => {
-    console.log(userId)
     return (
         <div
             className="right-container"

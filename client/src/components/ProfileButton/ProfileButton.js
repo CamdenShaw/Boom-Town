@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
 const MyProfile = ({ userId }) => {
-    console.log(userId)
     return (
         <Link to={`/profile/${userId}`}>
             <RaisedButton label="My Profile" primary />
