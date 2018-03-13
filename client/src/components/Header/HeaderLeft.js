@@ -9,7 +9,7 @@ class HeaderLeft extends Component {
         return (
             <div className="left-container" style={{ height: 50, display: "flex" }}>
                 <Logo />
-                && <Search />
+                <Search />
             </div>
         )
     }

@@ -126,7 +126,17 @@ class ShareContainer extends Component {
 
     submitForm = () => {
         console.log(this.state.fetchItem)
-        this.props.addThisItem = this.state.fetchItem
+        const {mutate} = this.props
+        let {itemowner, imageurl, description, tags, title} = this.state.fetchItem
+        mutate({
+            variables: {
+                itemowner: undefined,
+                imageurl: undefined,
+                description: "",
+                tags: [],
+                title: ""
+            }
+        })
     }
 
     render() {

@@ -1,26 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import TextField from 'material-ui/TextField';
+import React from "react"
+import PropTypes from "prop-types"
+import TextField from "material-ui/TextField"
 
-import { blueGrey900 } from 'material-ui/styles/colors';
+import { blueGrey900 } from "material-ui/styles/colors"
 
 const styles = {
     fieldStyle: {
-        width: '100%'
+        width: "100%"
     },
     errorStyle: {
         color: blueGrey900,
-        position: 'absolute',
-        bottom: '-0.42rem'
+        position: "absolute",
+        bottom: "-0.42rem"
     },
     underlineStyle: {
         borderColor: blueGrey900
     }
-};
+}
 
 const ValidatedTextField = field => (
     <TextField
         style={styles.fieldStyle}
+        type={field.input.name}
         id={field.input.name}
         hintText={field.input.name}
         floatingLabelText={field.input.name}
@@ -28,6 +29,6 @@ const ValidatedTextField = field => (
         underlineFocusStyle={styles.underlineStyle}
         {...field.input}
     />
-);
+)
 
-export default ValidatedTextField;
+export default ValidatedTextField
