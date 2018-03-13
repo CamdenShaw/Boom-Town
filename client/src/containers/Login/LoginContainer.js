@@ -78,8 +78,8 @@ function mapStateToProps(state) {
   const values = formValueSelector("loginForm")
   return {
     newUser: values(state, "email", "password"),
-    auth: state.auth.auth,
-    loading: state.auth.isLoading
+    logAuth: state.auth.auth,
+    logLoading: state.auth.isLoading
   }
 }
 

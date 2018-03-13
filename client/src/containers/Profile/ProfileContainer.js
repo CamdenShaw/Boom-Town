@@ -8,7 +8,7 @@ import Profile from "./Profile"
 class ProfileContainer extends Component {
 
     id() {
-        return this.props.match.params.userId
+        return this.props.match.params.profUserId
     }
 
     render() {
@@ -72,8 +72,8 @@ const fetchItemData =  gql`
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth.auth,
-        userId: state.auth.userId
+        ProfAuth: state.auth.auth,
+        ProfUserId: state.auth.userId
     }
 }
 

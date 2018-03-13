@@ -20,10 +20,6 @@ class HeaderContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.dispatch(userIdFetch())
-  }
-
   urlSlicer = () => {
     let checkerUrl = window.location.href.slice(this.state.url.length+1)
     let checker = checkerUrl.slice(0, 5)
@@ -44,13 +40,14 @@ class HeaderContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(this.state.usrId === '' && nextProps.userId) this.setState({
-      userId: nextProps.userId
+    if(this.state.usrId === '' && nextProps.headUserId) this.setState({
+      userId: nextProps.headUserId
     })
   }
 
   componentDidMount() {
     this.setUrl()
+    // this.props.dispatch(userIdFetch())
     this.urlSlicer()
   }
 
@@ -64,15 +61,15 @@ class HeaderContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.state.thisUrl !== window.location.href && this.props.userId == undefined || !this.props.userId)
+    return (this.state.thisUrl !== window.location.href && this.props.headUserId == undefined || !this.props.headUserId)
   }
 
   render() {
     let { checkUrl } = this.state
-    let { userId, auth } = this.props
+    let { headUserId, headAuth } = this.props
     if( checkUrl === 'login') return null
     else return (
-        userId ? <AppBar
+        headUserId ? <AppBar
           titleStyle={{display: 'none'}}
           style={{
             display: 'flex',
@@ -80,8 +77,8 @@ class HeaderContainer extends Component {
             height: 64,
             justifyContent: 'space-between'
           }}
-          iconElementLeft={<HeaderLeft />}
-          iconElementRight={<HeaderRight userId={userId} /> }
+          iconElementLeft={<HeaderLeft url={this.state.checkUrl} />}
+          iconElementRight={<HeaderRight userId={headUserId} /> }
         /> : <p>loading</p>
     )
   }
@@ -94,8 +91,8 @@ HeaderContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-      userId: state.auth.userId,
-      auth: state.auth.auth
+      headUserId: state.auth.userId,
+      headAuth: state.auth.auth
   }
 }
 

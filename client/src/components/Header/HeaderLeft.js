@@ -5,10 +5,11 @@ import Search from "../Search"
 
 class HeaderLeft extends Component {
     render() {
+        console.log(this.props)
         return (
             <div className="left-container" style={{ height: 50, display: "flex" }}>
                 <Logo />
-                <Search />
+                && <Search />
             </div>
         )
     }

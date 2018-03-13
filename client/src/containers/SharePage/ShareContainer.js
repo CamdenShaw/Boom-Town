@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import * as firebase from "firebase"
+import gql from 'graphql-tag'
+import {graphql} from "react-apollo"
 
 import placeholderImage from "../../images/item-placeholder.jpg"
 import Share from "./Share"
@@ -27,13 +29,15 @@ class ShareContainer extends Component {
         }
     }
 
-    componentDidUpdate() {
-        !this.state.fetchItem.itemowner && this.props.auth && this.setState({
+    componentDidMount() {
+        console.log(this.props, 'it did')
+        !this.state.fetchItem.itemowner && this.props.shareAuth && this.setState({
             fetchItem: {
                 ...this.state.fetchItem,
-                itemowner: this.props.user.uid
+                itemowner: this.props.shareUser.uid
             }
         })
+        this.props.shareUser ? undefined : this.forceUpdate()
     }
 
     grabImage = e => {
@@ -111,7 +115,7 @@ class ShareContainer extends Component {
     }
 
     submitValues = (event, index, values) => {
-        let tags = values
+        let tags = `${values}`
         this.setState({
             fetchItem: {
                 ...this.state.fetchItem,
@@ -122,13 +126,13 @@ class ShareContainer extends Component {
 
     submitForm = () => {
         console.log(this.state.fetchItem)
+        this.props.addThisItem = this.state.fetchItem
     }
 
     render() {
         let { localTitle, loading, imagePreview, imageurl } = this.state
-        return (
-            !this.props.user ? <p>loading</p>
-            : <Share
+        // this.props.user ? null : this.forceUpdate()
+        return ( <Share
                 grabImage={this.grabImage}
                 imageUrl={imagePreview}
                 loading={loading}
@@ -143,11 +147,43 @@ class ShareContainer extends Component {
     }
 }
 
+const mutateItem = gql`
+    mutation addItem(
+        $title: String!, 
+        $description: String,
+        $imageurl: String!,
+        $tags: [ID],
+        $itemowner: ID!
+    ){
+        addItem (
+            title: $title
+            description: $description
+            imageurl: $imageurl
+            borrower: $borrower
+            itemowner: $itemowner
+            tags: [$tags]
+        ){
+            title
+            description
+        }
+    }
+`
+
+ShareContainer.defaultProps = {
+    addThisItem: {}
+}
+
+const ToGraph = graphql(mutateItem, {
+    options: ownProps => ({
+        variables: console.log(ownProps)
+    })
+})(ShareContainer)
+
 function mapStateToProps(state) {
     return {
-        auth: state.auth.auth,
-        user: state.auth.user
+        shareAuth: state.auth.auth,
+        shareUser: state.auth.user
     }
 }
 
-export default connect(mapStateToProps)(ShareContainer)
+export default connect(mapStateToProps)(ToGraph)
