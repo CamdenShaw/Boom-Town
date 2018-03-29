@@ -1,7 +1,9 @@
 import * as firebase from 'firebase'
-
 import fetch from 'node-fetch'
 import pool from '../psql-server/pgResource'
+
+require("babel-core/register")
+require("babel-polyfill")
 
 const config = {
   apiKey: "AIzaSyCacootitVuGBMMLraKExCak9LGqgdb-LE",
